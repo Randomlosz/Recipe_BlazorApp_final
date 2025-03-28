@@ -1,0 +1,133 @@
+﻿@page "/adding"
+@using BlazorApp_Recipes.Data
+@inject RecipeService Service
+
+<PageTitle>Adding new recipe</PageTitle>
+
+@code {
+    private Recipe newRecipe = new Recipe();
+
+    int value_1, value_2, value_3, value_4, value_5, value_6, value_7;
+    string unit_1, unit_2, unit_3, unit_4, unit_5, unit_6, unit_7;
+    string type_1, type_2, type_3, type_4, type_5, type_6, type_7;
+
+    List<string> CategoryType => Service.CategoryTypes;
+    private IEnumerable<string> SortedItems => CategoryType.Where(item => item != "Other") 
+                                                                    .OrderBy(item => item)         
+                                                                    .Concat(CategoryType.Where(item => item == "Other"));
+
+
+    private string concat(int value, string unit, string type) => $"{value} {unit} {type}";
+
+    private void AddRecipe()
+    {
+        List<string> newIngredients = new List<string>();
+        if (!string.IsNullOrEmpty(unit_1)) newIngredients.Add(concat(value_1, unit_1, type_1));
+        if (!string.IsNullOrEmpty(unit_2)) newIngredients.Add(concat(value_2, unit_2, type_2));
+        if (!string.IsNullOrEmpty(unit_3)) newIngredients.Add(concat(value_3, unit_3, type_3));
+        if (!string.IsNullOrEmpty(unit_4)) newIngredients.Add(concat(value_4, unit_4, type_4));
+        if (!string.IsNullOrEmpty(unit_5)) newIngredients.Add(concat(value_5, unit_5, type_5));
+        if (!string.IsNullOrEmpty(unit_6)) newIngredients.Add(concat(value_6, unit_6, type_6));
+        if (!string.IsNullOrEmpty(unit_7)) newIngredients.Add(concat(value_7, unit_7, type_7));
+
+        newRecipe.SetIngredients(newIngredients);
+        Service.AddRecipeAsync(newRecipe);
+    }
+}
+
+<h1>Adding new recipe</h1>
+
+<EditForm Model="newRecipe" OnValidSubmit="AddRecipe">
+    
+    <div class="field">
+        <label for="name">Name:</label>
+        <InputText id="name" @bind-Value="newRecipe.Name" class="form-control" />
+    </div>
+
+    <div class="field">
+        <label for="category">Category:</label>
+        <select>
+            @foreach (var item in SortedItems)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+
+    <div class="field">
+        <label for="servings">Servings:</label>
+        <InputNumber id="servings" @bind-Value="newRecipe.Servings" class="form-control" />
+    </div>
+
+    <div class="field">
+        <label for="note">Note:</label>
+        <InputText id="note" @bind-Value="newRecipe.Note" class="form-control" />
+    </div>
+
+    <div class="field">
+        <label for="note">Ingredients:</label>
+        <div class="input-row">
+            <InputNumber id="value_1" @bind-Value="value_1" class="form-control input-field" />
+            <InputText   id="unit_1"  @bind-Value="unit_1" class="form-control input-field" placeholder="cup(s)" />
+            <InputText   id="type_1"  @bind-Value="type_1" class="form-control input-field" placeholder="butter" />
+        </div>
+        <div class="input-row">
+            <InputNumber id="value_2" @bind-Value="value_2" class="form-control input-field" />
+            <InputText id="unit_2" @bind-Value="unit_2" class="form-control input-field" placeholder="spoon(s)" />
+            <InputText id="type_2" @bind-Value="type_2" class="form-control input-field" placeholder="milk" />
+        </div>
+        <div class="input-row">
+            <InputNumber id="value_3" @bind-Value="value_3" class="form-control input-field" />
+            <InputText id="unit_3" @bind-Value="unit_3" class="form-control input-field" />
+            <InputText id="type_3" @bind-Value="type_3" class="form-control input-field" />
+        </div>
+        <div class="input-row">
+            <InputNumber id="value_4" @bind-Value="value_4" class="form-control input-field" />
+            <InputText id="unit_4" @bind-Value="unit_4" class="form-control input-field" />
+            <InputText id="type_4" @bind-Value="type_4" class="form-control input-field" />
+        </div>
+        <div class="input-row">
+            <InputNumber id="value_5" @bind-Value="value_5" class="form-control input-field" />
+            <InputText id="unit_5" @bind-Value="unit_5" class="form-control input-field" />
+            <InputText id="type_5" @bind-Value="type_5" class="form-control input-field" />
+        </div>
+        <div class="input-row">
+            <InputNumber id="value_6" @bind-Value="value_6" class="form-control input-field" />
+            <InputText id="unit_6" @bind-Value="unit_6" class="form-control input-field" />
+            <InputText id="type_6" @bind-Value="type_6" class="form-control input-field" />
+        </div>
+        <div class="input-row">
+            <InputNumber id="value_7" @bind-Value="value_7" class="form-control input-field" />
+            <InputText id="unit_7" @bind-Value="unit_7" class="form-control input-field" />
+            <InputText id="type_7" @bind-Value="type_7" class="form-control input-field" />
+        </div>
+
+
+    </div>
+
+
+    <h1></h1>
+    <button type="submit" class="btn btn-primary">Add Recipe</button>
+
+
+
+
+
+</EditForm>
+
+
+<style>
+    .input-row {
+        display: flex;
+        gap: 10px; /* Adjust the gap between input fields as needed */
+        margin-bottom: 10px; /* Add spacing between rows */
+    }
+
+    .input-field {
+        flex: 1;
+    }
+
+    .field{
+        margin-bottom: 15px; /* Add spacing between rows */
+    }
+</style>

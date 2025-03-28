@@ -1,0 +1,54 @@
+﻿@page "/recipebook"
+@using BlazorApp_Recipes.Data
+@inject RecipeService Service
+
+<PageTitle>Recipe book</PageTitle>
+
+<h1>Recipe book</h1>
+
+<p>Here you can see all your stored recipes.</p>
+
+@if (recipes == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!recipes.Any())
+{
+    <p><em>No recipes available.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Servings</th>
+                <th>Note</th>
+                <th>Ingredients</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var recipe in recipes)
+            {
+                <tr>
+                    <td>@recipe.Name</td>
+                    <td>@recipe.Category</td>
+                    <td>@recipe.Servings</td>
+                    <td>@recipe.Note</td>
+                    <td>@string.Join(", ", recipe.GetIngredients())</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Recipe[]? recipes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Service.Init();
+        recipes = await Service.GetAllRecipeAsync();
+    }
+}
