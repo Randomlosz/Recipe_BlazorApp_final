@@ -33,6 +33,7 @@
         newRecipe.SetIngredients(newIngredients);
         Service.AddRecipeAsync(newRecipe);
     }
+
 }
 
 <h1>Adding new recipe</h1>
@@ -107,9 +108,27 @@
 
 
     <h1></h1>
-    <button type="submit" class="btn btn-primary">Add Recipe</button>
+    <button type="submit" class="btn btn-primary" @onclick="ShowMessage">Add Recipe</button>
 
+    @if (ShowPopupMessage)
+    {
+        <div class="popup">Recipe was added successfully!</div>
+    }
 
+    @code {
+        private bool ShowPopupMessage = false;
+
+        private async Task ShowMessage()
+        {
+        ShowPopupMessage = true; // Show the popup
+        StateHasChanged(); // Trigger UI update
+
+        await Task.Delay(3000); // Wait for 3 seconds
+
+        ShowPopupMessage = false; // Hide the popup
+        StateHasChanged(); // Update UI again
+        }
+    }
 
 
 
@@ -130,4 +149,22 @@
     .field{
         margin-bottom: 15px; /* Add spacing between rows */
     }
+
+
+    .popup {
+        position: fixed;
+        top: 10px; /* Position it near the top of the page */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for perfect centering */
+        background-color: #bd9100; /* Warm orange #FFA500 */
+        color: #FFFFFF; /* White text for visibility */
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        opacity: 1;
+        transition: opacity 3s ease-in-out; /* Smooth fade-out effect */
+        z-index: 1000; /* Ensure it stays on top */
+        font-size: 0.9em; /* Smaller font size to make it compact */
+    }
+
 </style>

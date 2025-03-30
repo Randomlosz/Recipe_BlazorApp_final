@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">BlazorApp_Recipes</a>
+        <a class="navbar-brand" href="">Recipe manager</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -9,22 +9,22 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
+        <div class="nav-item">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
+        <div class="nav-item">
+            <NavLink class="nav-link" href="search">
+                <span class="oi oi-magnifying-glass" aria-hidden="true"></span> Searching
+            </NavLink>
+        </div>
+        <div class="nav-item">
             <NavLink class="nav-link" href="adding">
                 <span class="oi oi-plus" aria-hidden="true"></span> Adding new recipe
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
+        <div class="nav-item">
             <NavLink class="nav-link" href="recipebook">
                 <span class="oi oi-list" aria-hidden="true"></span> Recipe book
             </NavLink>
@@ -42,3 +42,21 @@
         collapseNavMenu = !collapseNavMenu;
     }
 }
+
+
+<style>
+    .flex-column {
+        background: linear-gradient(to bottom, #b3b000, #bd8400, #bd6800); /* Smooth gradient */
+        width: 250px; /* Fixed width for the left side */
+        height: 100vh; /* Full height of the viewport */
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .top-row {
+        border-bottom: 3px solid #FFD700; /* Golden yellow border for separation */
+    }
+
+</style>
