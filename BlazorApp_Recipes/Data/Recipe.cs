@@ -1,15 +1,23 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.CodeAnalysis.Scripting.Hosting;
+using Newtonsoft.Json.Linq;
 
 namespace BlazorApp_Recipes.Data
 {
     public class Ingredient
     {
-        public int Value{ get; set; }
+        public int Id { get; set; } // Primary key
+        public double Value{ get; set; }
         public string Unit{ get; set; }
         public string Type { get; set; }
+
+        // Foreign key reference to Recipe: one-to-many (i.e., a Recipe can have multiple Ingredients)
+        public int RecipeId { get; set; }
+        public Recipe Recipe { get; set; }
     }
     public class Recipe
     {
+        public Recipe() { Category = "Breakfast/Dinner"; }
+        public int Id { get; set; } //Primary key
         public string Name { get; set; }
         public string Category { get; set; }
 
@@ -32,18 +40,18 @@ namespace BlazorApp_Recipes.Data
             Ingredients = ingredientDescriptions.Select(description =>
             {
                 var parts = description.Split(' ');
-                if (parts.Length == 3 && int.TryParse(parts[0], out int value))
+                if (double.TryParse(parts[0], out double value))
                 {
                     return new Ingredient
                     {
                         Value = value,
                         Unit = parts[1],
-                        Type = parts[2]
+                        Type = string.Join(" ", parts.Skip(2)) // Combine the remaining parts into a single string
                     };
                 }
                 else
                 {
-                    throw new ArgumentException("Invalid format. Description must be in the format 'Value Unit Type'.");
+                    throw new ArgumentException($"Invalid format. Description must be in the format 'Value Unit Type'.\n Description:-{description}-");
                 }
             }).ToList();
         }

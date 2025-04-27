@@ -1,13 +1,19 @@
 using BlazorApp_Recipes.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<RecipeService>();
+builder.Services.AddScoped<RecipeService>();
+
+builder.Services.AddDbContext<RecipeDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BlazorApp_RecipesContext"));
+});
 
 var app = builder.Build();
 

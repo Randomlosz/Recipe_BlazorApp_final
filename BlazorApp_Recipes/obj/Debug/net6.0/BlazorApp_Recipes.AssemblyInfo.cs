@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BlazorApp_Recipes")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e264109f97bd544222142ae39e6c2f0652f19cc9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0085cc7bcf031667e7f02992a1a1a9b2be893752")]
 [assembly: System.Reflection.AssemblyProductAttribute("BlazorApp_Recipes")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BlazorApp_Recipes")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
