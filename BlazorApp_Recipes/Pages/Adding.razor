@@ -5,9 +5,9 @@
 <PageTitle>Adding new recipe</PageTitle>
 
 @code {
-    private Recipe newRecipe = new Recipe();
+    Recipe newRecipe = new Recipe();
 
-    int value_1, value_2, value_3, value_4, value_5, value_6, value_7;
+    double value_1, value_2, value_3, value_4, value_5, value_6, value_7;
     string unit_1, unit_2, unit_3, unit_4, unit_5, unit_6, unit_7;
     string type_1, type_2, type_3, type_4, type_5, type_6, type_7;
 
@@ -16,22 +16,25 @@
                                                                     .OrderBy(item => item)         
                                                                     .Concat(CategoryType.Where(item => item == "Other"));
 
-
-    private string concat(int value, string unit, string type) => $"{value} {unit} {type}";
-
-    private void AddRecipe()
+    private async Task AddRecipe()
     {
-        List<string> newIngredients = new List<string>();
-        if (!string.IsNullOrEmpty(unit_1)) newIngredients.Add(concat(value_1, unit_1, type_1));
-        if (!string.IsNullOrEmpty(unit_2)) newIngredients.Add(concat(value_2, unit_2, type_2));
-        if (!string.IsNullOrEmpty(unit_3)) newIngredients.Add(concat(value_3, unit_3, type_3));
-        if (!string.IsNullOrEmpty(unit_4)) newIngredients.Add(concat(value_4, unit_4, type_4));
-        if (!string.IsNullOrEmpty(unit_5)) newIngredients.Add(concat(value_5, unit_5, type_5));
-        if (!string.IsNullOrEmpty(unit_6)) newIngredients.Add(concat(value_6, unit_6, type_6));
-        if (!string.IsNullOrEmpty(unit_7)) newIngredients.Add(concat(value_7, unit_7, type_7));
+        newRecipe.Ingredients = new List<Ingredient>();
+        if (!string.IsNullOrEmpty(unit_1)) newRecipe.Ingredients.Add(new Ingredient { Value = value_1, Unit = unit_1, Type = type_1 });
+        if (!string.IsNullOrEmpty(unit_2)) newRecipe.Ingredients.Add(new Ingredient { Value = value_2, Unit = unit_2, Type = type_2 });
+        if (!string.IsNullOrEmpty(unit_3)) newRecipe.Ingredients.Add(new Ingredient { Value = value_3, Unit = unit_3, Type = type_3 });
+        if (!string.IsNullOrEmpty(unit_4)) newRecipe.Ingredients.Add(new Ingredient { Value = value_4, Unit = unit_4, Type = type_4 });
+        if (!string.IsNullOrEmpty(unit_5)) newRecipe.Ingredients.Add(new Ingredient { Value = value_5, Unit = unit_5, Type = type_5 });
+        if (!string.IsNullOrEmpty(unit_6)) newRecipe.Ingredients.Add(new Ingredient { Value = value_6, Unit = unit_6, Type = type_6 });
+        if (!string.IsNullOrEmpty(unit_7)) newRecipe.Ingredients.Add(new Ingredient { Value = value_7, Unit = unit_7, Type = type_7 });
 
-        newRecipe.SetIngredients(newIngredients);
-        Service.AddRecipeAsync(newRecipe);
+        try
+        {
+             await Service.AddRecipeAsync(newRecipe);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
 
 }
@@ -47,7 +50,7 @@
 
     <div class="field">
         <label for="category">Category:</label>
-        <select>
+        <select id="category" @bind="newRecipe.Category" class="form-control">
             @foreach (var item in SortedItems)
             {
                 <option value="@item">@item</option>

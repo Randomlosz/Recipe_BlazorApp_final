@@ -49,6 +49,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         //Service.Init();
-        recipes = await Service.GetAllRecipeAsync();
+        recipes = (await Service.GetAllRecipesAsync()).ToArray();
     }
 }

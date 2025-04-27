@@ -1,10 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorApp_Recipes.Data
 {
     public class RecipeService
     {
         List<Recipe> _recipes = new List<Recipe>();
+
 
         private static readonly List<string> _categoryTypes = new List<string>
         {
@@ -27,34 +29,50 @@ namespace BlazorApp_Recipes.Data
 
 
         //------------------------------------------------
-        //------------- Service function -----------------
+        //------------- Database function -----------------
         //------------------------------------------------
 
-        public async Task<Recipe[]> GetRecipeAsync(string name) => await Task.FromResult(_recipes.Where(x => x.Name == name).ToArray());
-        public async Task<Recipe[]> GetAllRecipeAsync() => await Task.FromResult(_recipes.ToArray());
+        private readonly RecipeDbContext _context;
 
-        public async Task AddRecipeAsync(string name, string category, List<Ingredient> ingredients, int? serving, string? note, string? description) 
-        {   
-            Recipe newRecipe = new Recipe();
-            newRecipe.Name = name;
-            newRecipe.Category = category;
-            newRecipe.Ingredients = ingredients;
-            newRecipe.Servings = serving;
-            newRecipe.Note = note;
-            //now.Description = description;
-
-            await Task.Run(  () => _recipes.Add(newRecipe)  );
-        }
-        public async Task AddRecipeAsync(string name, string category, List<Ingredient> ingredients)
+        public RecipeService(RecipeDbContext context)
         {
-            await AddRecipeAsync(name, category, ingredients, null, null, null);
+            _context = context;
         }
-        public async Task AddRecipeAsync(Recipe newRecipe)
+
+        public async Task<List<Recipe>> GetAllRecipesAsync()
         {
-            await Task.Run(() => _recipes.Add(newRecipe));
+            return await _context.Recipes.Include(r => r.Ingredients).ToListAsync();
         }
 
+        public async Task AddRecipeAsync(Recipe recipe)
+        {
+            _context.Recipes.Add(recipe);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving data: {ex.Message}");
+            }
+        }
 
+        public async Task UpdateRecipeAsync(Recipe recipe)
+        {
+            _context.Recipes.Update(recipe);
+            await _context.SaveChangesAsync();
+        }
 
+        public async Task DeleteRecipeAsync(int id)
+        {
+            var recipe = await _context.Recipes.FindAsync(id);
+            if (recipe != null)
+            {
+                _context.Recipes.Remove(recipe);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        //var tables = await context.Database.ExecuteSqlRawAsync("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'");
     }
 }
