@@ -499,3 +499,7 @@ C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\obj\Debug\net
 C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\obj\Debug\net6.0\BlazorApp_Recipes.pdb
 C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\obj\Debug\net6.0\BlazorApp_Recipes.genruntimeconfig.cache
 C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\obj\Debug\net6.0\ref\BlazorApp_Recipes.dll
+C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
+C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\Renii\Documents\GitHub\Recipe_BlazorApp\BlazorApp_Recipes\bin\Debug\net6.0\Radzen.Blazor.dll

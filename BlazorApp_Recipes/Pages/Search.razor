@@ -1,7 +1,129 @@
 ﻿@page "/search"
+@using BlazorApp_Recipes.Data
+@inject RecipeService Service
+@using Radzen
+@using Radzen.Blazor
+
+
 
 <PageTitle>Searching</PageTitle>
 
 <h1>Filtering recipes</h1>
 
-Something will happen here.
+@code {
+    List<string> _options => Service.CategoryTypes;
+    private List<Recipe> filteredItems = new();
+}
+
+<RadzenStack class="rz-p-0 rz-p-md-12">
+    <RadzenCard class="rz-p-4" Variant="Variant.Outlined" Gap="8px">
+        <div class="custom-padding">
+        Servings
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="16px">
+            <RadzenToggleButton Text="At least" @bind-Value="IsMin" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("min"))" />
+            <RadzenToggleButton Text="Exactly" @bind-Value="IsEqual" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("equal"))" />
+            <RadzenToggleButton Text="Up to" @bind-Value="IsMax" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("max"))" />
+            </RadzenStack>
+        </div>
+        <div class="custom-padding">
+        Category
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="16px">             
+                @foreach (var option in _options)
+                {
+                <RadzenToggleButton ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small">@option</RadzenToggleButton>
+                }
+            </RadzenStack>
+        </div>
+        <div class="custom-padding">
+        Name
+            <RadzenStack Orientation="Orientation.Horizontal">               
+                <input type="text" @bind="SearchTerm_Name" placeholder="Search..." />
+            </RadzenStack> 
+        </div>
+        <div class="custom-padding">
+        Note
+            <RadzenStack Orientation="Orientation.Horizontal">        
+                <input type="text" @bind="SearchTerm_Note" placeholder="Search..." />
+            </RadzenStack>
+        </div>
+
+        <button type="submit" class="btn btn-primary" @onclick="PerformSearch">Search</button>
+
+    </RadzenCard>
+</RadzenStack>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Servings</th>
+            <th>Note</th>
+            <th>Ingredients</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in filteredItems)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td>@recipe.Category</td>
+                <td>@recipe.Servings</td>
+                <td>@recipe.Note</td>
+                <td>@string.Join(", ", recipe.GetIngredients())</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private Recipe[]? recipes;
+    protected override async Task OnInitializedAsync() => recipes = (await Service.GetAllRecipesAsync()).ToArray();
+    
+    private string SearchTerm_Name = "";
+    private string SearchTerm_Note = "";
+    private bool IsMin = true;
+    private bool IsEqual= false;
+    private bool IsMax = false;
+
+
+    private void ToggleSelection(string mode)
+    {
+        if (mode == "min")
+        {
+            IsMin = true;
+            IsEqual = false;
+            IsMax = false;
+        }
+        else if (mode == "equal")
+        {
+            IsMin = false;
+            IsEqual = true;
+            IsMax = false;
+        }
+        else if (mode == "max")
+        {
+            IsMin = false;
+            IsEqual = false;
+            IsMax = true;
+        }
+    }
+
+
+  
+    private void PerformSearch()
+    {
+        filteredItems = recipes.Where(item =>
+            (string.IsNullOrEmpty(SearchTerm_Name) || item.Name.Contains(SearchTerm_Name, StringComparison.OrdinalIgnoreCase)) &&
+            (string.IsNullOrEmpty(SearchTerm_Note) || (item.Note != null && item.Note.Contains(SearchTerm_Note, StringComparison.OrdinalIgnoreCase)))
+        ).ToList();
+
+    }
+}
+
+
+<style>
+    .custom-padding {
+        padding-bottom: 16px;
+    }
+</style>
