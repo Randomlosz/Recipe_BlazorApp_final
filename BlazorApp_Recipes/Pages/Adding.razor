@@ -5,31 +5,43 @@
 <PageTitle>Adding new recipe</PageTitle>
 
 @code {
-    Recipe newRecipe = new Recipe();
+    private bool ShowPopupMessage = false;
 
-    double value_1, value_2, value_3, value_4, value_5, value_6, value_7;
-    string unit_1, unit_2, unit_3, unit_4, unit_5, unit_6, unit_7;
-    string type_1, type_2, type_3, type_4, type_5, type_6, type_7;
+    private Recipe newRecipe;
+    protected override void OnInitialized()
+    {
+        newRecipe = new Recipe
+            {
+                Ingredients = Enumerable.Range(0, 1)
+                    .Select(_ => new Ingredient())
+                    .ToList()
+            };
+    }
 
     List<string> CategoryType => Service.CategoryTypes;
     private IEnumerable<string> SortedItems => CategoryType.Where(item => item != "Other") 
                                                                     .OrderBy(item => item)         
                                                                     .Concat(CategoryType.Where(item => item == "Other"));
-
+                                                                       
     private async Task AddRecipe()
     {
-        newRecipe.Ingredients = new List<Ingredient>();
-        if (!string.IsNullOrEmpty(unit_1)) newRecipe.Ingredients.Add(new Ingredient { Value = value_1, Unit = unit_1, Type = type_1 });
-        if (!string.IsNullOrEmpty(unit_2)) newRecipe.Ingredients.Add(new Ingredient { Value = value_2, Unit = unit_2, Type = type_2 });
-        if (!string.IsNullOrEmpty(unit_3)) newRecipe.Ingredients.Add(new Ingredient { Value = value_3, Unit = unit_3, Type = type_3 });
-        if (!string.IsNullOrEmpty(unit_4)) newRecipe.Ingredients.Add(new Ingredient { Value = value_4, Unit = unit_4, Type = type_4 });
-        if (!string.IsNullOrEmpty(unit_5)) newRecipe.Ingredients.Add(new Ingredient { Value = value_5, Unit = unit_5, Type = type_5 });
-        if (!string.IsNullOrEmpty(unit_6)) newRecipe.Ingredients.Add(new Ingredient { Value = value_6, Unit = unit_6, Type = type_6 });
-        if (!string.IsNullOrEmpty(unit_7)) newRecipe.Ingredients.Add(new Ingredient { Value = value_7, Unit = unit_7, Type = type_7 });
-
         try
         {
-             await Service.AddRecipeAsync(newRecipe);
+            await Service.AddRecipeAsync(newRecipe);
+
+            ShowPopupMessage = true;
+            StateHasChanged();
+            await Task.Delay(3000);
+            ShowPopupMessage = false;
+            StateHasChanged();
+
+            // Reset newRecipe to a fresh instance
+            newRecipe = new Recipe()
+                {
+                    Ingredients = Enumerable.Range(0, 1)
+                        .Select(_ => new Ingredient())
+                        .ToList()
+                };
         }
         catch (Exception ex)
         {
@@ -41,101 +53,68 @@
 
 <h1>Adding new recipe</h1>
 
-<EditForm Model="newRecipe" OnValidSubmit="AddRecipe">
-    
-    <div class="field">
-        <label for="name">Name:</label>
-        <InputText id="name" @bind-Value="newRecipe.Name" class="form-control" />
-    </div>
+@if (newRecipe?.Ingredients?.Count <= 0)
+{
+    <p>Loading recipe form…</p>
+}
+else
+{
+    <EditForm Model="newRecipe" OnValidSubmit="AddRecipe">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
-    <div class="field">
-        <label for="category">Category:</label>
-        <select id="category" @bind="newRecipe.Category" class="form-control">
-            @foreach (var item in SortedItems)
+
+        <div class="field">
+            <label for="name">Name:</label>
+            <InputText id="name" @bind-Value="newRecipe.Name" class="form-control" />
+        </div>
+
+        <div class="field">
+            <label for="category">Category:</label>
+            <select id="category" @bind="newRecipe.Category" class="form-control">
+                @foreach (var item in SortedItems)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="servings">Servings:</label>
+            <InputNumber id="servings" @bind-Value="newRecipe.Servings" class="form-control" />
+        </div>
+
+        <div class="field">
+            <label for="note">Note:</label>
+            <InputText id="note" @bind-Value="newRecipe.Note" class="form-control" />
+        </div>
+
+        <div class="field">
+            <label for="note">Ingredients:</label>
+            @foreach (var ingredient in newRecipe.Ingredients)
             {
-                <option value="@item">@item</option>
+                <div class="input-row">
+                    <InputNumber @bind-Value="ingredient.Value" class="form-control input-field" />
+                    <InputText @bind-Value="ingredient.Unit" class="form-control input-field" placeholder="cup(s)" />
+                    <InputText @bind-Value="ingredient.Type" class="form-control input-field" placeholder="butter" />
+                </div>
             }
-        </select>
-    </div>
-
-    <div class="field">
-        <label for="servings">Servings:</label>
-        <InputNumber id="servings" @bind-Value="newRecipe.Servings" class="form-control" />
-    </div>
-
-    <div class="field">
-        <label for="note">Note:</label>
-        <InputText id="note" @bind-Value="newRecipe.Note" class="form-control" />
-    </div>
-
-    <div class="field">
-        <label for="note">Ingredients:</label>
-        <div class="input-row">
-            <InputNumber id="value_1" @bind-Value="value_1" class="form-control input-field" />
-            <InputText   id="unit_1"  @bind-Value="unit_1" class="form-control input-field" placeholder="cup(s)" />
-            <InputText   id="type_1"  @bind-Value="type_1" class="form-control input-field" placeholder="butter" />
-        </div>
-        <div class="input-row">
-            <InputNumber id="value_2" @bind-Value="value_2" class="form-control input-field" />
-            <InputText id="unit_2" @bind-Value="unit_2" class="form-control input-field" placeholder="spoon(s)" />
-            <InputText id="type_2" @bind-Value="type_2" class="form-control input-field" placeholder="milk" />
-        </div>
-        <div class="input-row">
-            <InputNumber id="value_3" @bind-Value="value_3" class="form-control input-field" />
-            <InputText id="unit_3" @bind-Value="unit_3" class="form-control input-field" />
-            <InputText id="type_3" @bind-Value="type_3" class="form-control input-field" />
-        </div>
-        <div class="input-row">
-            <InputNumber id="value_4" @bind-Value="value_4" class="form-control input-field" />
-            <InputText id="unit_4" @bind-Value="unit_4" class="form-control input-field" />
-            <InputText id="type_4" @bind-Value="type_4" class="form-control input-field" />
-        </div>
-        <div class="input-row">
-            <InputNumber id="value_5" @bind-Value="value_5" class="form-control input-field" />
-            <InputText id="unit_5" @bind-Value="unit_5" class="form-control input-field" />
-            <InputText id="type_5" @bind-Value="type_5" class="form-control input-field" />
-        </div>
-        <div class="input-row">
-            <InputNumber id="value_6" @bind-Value="value_6" class="form-control input-field" />
-            <InputText id="unit_6" @bind-Value="unit_6" class="form-control input-field" />
-            <InputText id="type_6" @bind-Value="type_6" class="form-control input-field" />
-        </div>
-        <div class="input-row">
-            <InputNumber id="value_7" @bind-Value="value_7" class="form-control input-field" />
-            <InputText id="unit_7" @bind-Value="unit_7" class="form-control input-field" />
-            <InputText id="type_7" @bind-Value="type_7" class="form-control input-field" />
         </div>
 
 
-    </div>
+        <h1></h1>
+        <button type="submit" class="btn btn-primary">Add Recipe</button>
 
-
-    <h1></h1>
-    <button type="submit" class="btn btn-primary" @onclick="ShowMessage">Add Recipe</button>
-
-    @if (ShowPopupMessage)
-    {
-        <div class="popup">Recipe was added successfully!</div>
-    }
-
-    @code {
-        private bool ShowPopupMessage = false;
-
-        private async Task ShowMessage()
+        @if (ShowPopupMessage)
         {
-        ShowPopupMessage = true; // Show the popup
-        StateHasChanged(); // Trigger UI update
-
-        await Task.Delay(3000); // Wait for 3 seconds
-
-        ShowPopupMessage = false; // Hide the popup
-        StateHasChanged(); // Update UI again
+            <div class="popup">Recipe was added successfully!</div>
         }
-    }
 
+ 
 
+    </EditForm>
 
-</EditForm>
+}
 
 
 <style>
