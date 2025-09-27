@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2gAGGOgWc0UaMvlFbM6n3pdlLd/sxq2qMbab2F98grY=",
+  "Hash": "O5b69xiaG2dRR84aF0CSXTImnhviukcWGx3ucIzTfUA=",
   "Source": "BlazorApp_Recipes",
   "BasePath": "_content/BlazorApp_Recipes",
   "Mode": "Default",
@@ -984,6 +984,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\wwwroot\\images\\a-toast.jpg",
+      "SourceId": "BlazorApp_Recipes",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\wwwroot\\",
+      "BasePath": "_content/BlazorApp_Recipes",
+      "RelativePath": "images/a-toast.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\a-toast.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\wwwroot\\images\\a-toast.png",
+      "SourceId": "BlazorApp_Recipes",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\wwwroot\\",
+      "BasePath": "_content/BlazorApp_Recipes",
+      "RelativePath": "images/a-toast.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\a-toast.png"
     }
   ]
 }
