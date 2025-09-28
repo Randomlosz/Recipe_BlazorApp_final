@@ -2,6 +2,7 @@
 @using BlazorApp_Recipes.Data
 @inject RecipeService Service
 @inject IJSRuntime JS
+@inject NavigationManager Navigation
 
 <PageTitle>Recipe book</PageTitle>
 
@@ -41,7 +42,7 @@ else
                     <td>@string.Join(", ", recipe.GetIngredients())</td>
                     <td>
                         <div class="d-flex">                          
-                            <button class="btn btn-primary btn-sm me-1" data-bs-toggle="tooltip" title="Edit" onclick="editRecipe(@recipe.Id)">
+                            <button class="btn btn-primary btn-sm me-1" data-bs-toggle="tooltip" title="Edit" @onclick="() => EditRecipe(recipe.Id)">
                                 <i class="fas fa-pen"></i>
                             </button>
                             <div data-bs-toggle="tooltip" title="Delete">
@@ -117,6 +118,12 @@ else
         await JS.InvokeVoidAsync("showDeleteToast");
         recipes = (await Service.GetAllRecipesAsync()).ToArray();
         StateHasChanged();
+    }
+
+    void EditRecipe(int id)
+    {
+        Navigation.NavigateTo($"/edit/{id}");
+
     }
 
 }

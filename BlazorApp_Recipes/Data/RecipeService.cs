@@ -27,6 +27,25 @@ namespace BlazorApp_Recipes.Data
                 }
         }
 
+        public Recipe CloneRecipe(Recipe source)
+        {
+            return new Recipe
+            {
+                Id = source.Id,
+                Name = source.Name,
+                Category = source.Category,
+                Note = source.Note,
+                Servings = source.Servings,
+                Ingredients = source.Ingredients
+                    .Select(i => new Ingredient
+                    {
+                        Id = i.Id,
+                        Value = i.Value,
+                        Unit = i.Unit,
+                        Type = i.Type
+                    }).ToList()
+            };
+        }
 
         //------------------------------------------------
         //------------- Database function -----------------
@@ -42,6 +61,10 @@ namespace BlazorApp_Recipes.Data
         public async Task<List<Recipe>> GetAllRecipesAsync()
         {
             return await _context.Recipes.Include(r => r.Ingredients).ToListAsync();
+        }
+        public async Task<Recipe?> GetRecipeByIdAsync(int id)
+        {
+            return await _context.Recipes.Include(r => r.Ingredients).FirstOrDefaultAsync(r => r.Id == id);
         }
 
         public async Task AddRecipeAsync(Recipe recipe)
