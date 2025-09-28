@@ -5,6 +5,7 @@ namespace BlazorApp_Recipes.Data
 {
     public class Ingredient
     {
+        public Ingredient() { Value= 0; Unit = ""; Type = ""; }
         public int Id { get; set; } // Primary key
         public double Value{ get; set; }
         public string Unit{ get; set; }

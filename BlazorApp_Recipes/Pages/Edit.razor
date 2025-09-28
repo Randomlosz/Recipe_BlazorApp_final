@@ -1,50 +1,40 @@
-﻿@page "/adding"
+﻿@page "/edit/{id:int}"
 @using BlazorApp_Recipes.Data
 @inject RecipeService Service
 
-<PageTitle>Adding new recipe</PageTitle>
+<PageTitle>Edit existing recipe</PageTitle>
 
 @code {
+    [Parameter]
+    public int id { get; set; }
+
     private bool ShowSuccessPopupMessage = false;
     private bool ShowFailPopupMessage = false;
 
-    private Recipe newRecipe;
-    protected override void OnInitialized()
+    private Recipe newRecipe = new Recipe();
+    protected override async Task OnInitializedAsync()
     {
-        newRecipe = new Recipe
-            {
-                Ingredients = Enumerable.Range(0, 1)
-                    .Select(_ => new Ingredient())
-                    .ToList()
-            };
+        newRecipe = Service.CloneRecipe(await Service.GetRecipeByIdAsync(id));
     }
 
     List<string> CategoryType => Service.CategoryTypes;
-    private IEnumerable<string> SortedItems => CategoryType.Where(item => item != "Other") 
-                                                                    .OrderBy(item => item)         
+    private IEnumerable<string> SortedItems => CategoryType.Where(item => item != "Other")
+                                                                    .OrderBy(item => item)
                                                                     .Concat(CategoryType.Where(item => item == "Other"));
 
-    private async Task AddRecipe()
+    private async Task EditRecipe()
     {
-        if (ValidBeforeAdding())
+        if (ValidBeforeEditing())
         {
             try
             {
-                await Service.AddRecipeAsync(newRecipe);
+                await Service.UpdateRecipeAsync(newRecipe);
 
                 ShowSuccessPopupMessage = true;
                 StateHasChanged();
                 await Task.Delay(3000);
                 ShowSuccessPopupMessage = false;
                 StateHasChanged();
-
-                // Reset newRecipe to a fresh instance
-                newRecipe = new Recipe()
-                    {
-                        Ingredients = Enumerable.Range(0, 1)
-                                    .Select(_ => new Ingredient())
-                                    .ToList()
-                    };
             }
             catch (Exception ex)
             {
@@ -68,7 +58,7 @@
     private async Task HandleClickRemoveIngredient()
     {
         Ingredient lastIngredient = newRecipe.Ingredients[newRecipe.Ingredients.Count - 1];
-        if(newRecipe.Ingredients.Count > 1)
+        if (newRecipe.Ingredients.Count > 1)
             newRecipe.Ingredients.Remove(lastIngredient);
         else if (newRecipe.Ingredients.Count == 1)
         {
@@ -76,7 +66,7 @@
         }
 
     }
-    private bool ValidBeforeAdding()
+    private bool ValidBeforeEditing()
     {
         if (newRecipe.Name == null)
             return false;
@@ -88,7 +78,12 @@
 
 }
 
-<h1>Adding new recipe</h1>
+<a href="/recipebook" class="btn btn-outline-primary">
+    ← Back to Recipe Book
+</a>
+<h1></h1>
+
+<h1>Edit existing recipe</h1>
 
 @if (newRecipe?.Ingredients?.Count <= 0)
 {
@@ -96,7 +91,7 @@
 }
 else
 {
-    <EditForm Model="newRecipe" OnValidSubmit="AddRecipe">
+    <EditForm Model="newRecipe" OnValidSubmit="EditRecipe">
         <DataAnnotationsValidator />
         <ValidationSummary />
 
@@ -144,18 +139,18 @@ else
             <button type="button" class="btn btn-secondary" @onclick="HandleClickAddIngredient">(+) Need More Ingredient</button>
         </div>
         <h1></h1>
-        <button type="submit" class="btn btn-primary">Add Recipe</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
 
         @if (ShowSuccessPopupMessage)
         {
-            <div class="popup-success">Recipe was added successfully!</div>
+            <div class="popup-success">Recipe was updated successfully!</div>
         }
         @if (ShowFailPopupMessage)
         {
-            <div class="popup-fail">Recipe can not be added! (Fill the Name and Ingredients fields.)</div>
+            <div class="popup-fail">Recipe can not be updated! (Fill the Name and Ingredients fields.)</div>
         }
 
- 
+
 
     </EditForm>
 
@@ -173,10 +168,9 @@ else
         flex: 1;
     }
 
-    .field{
+    .field {
         margin-bottom: 15px; /* Add spacing between rows */
     }
-
 
     .popup-success {
         position: fixed;
@@ -193,7 +187,6 @@ else
         z-index: 1000; /* Ensure it stays on top */
         font-size: 0.9em; /* Smaller font size to make it compact */
     }
-
     .popup-fail {
         position: fixed;
         top: 10px; /* Position it near the top of the page */
