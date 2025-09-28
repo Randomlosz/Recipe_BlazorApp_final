@@ -5,7 +5,8 @@
 <PageTitle>Adding new recipe</PageTitle>
 
 @code {
-    private bool ShowPopupMessage = false;
+    private bool ShowSuccessPopupMessage = false;
+    private bool ShowFailPopupMessage = false;
 
     private Recipe newRecipe;
     protected override void OnInitialized()
@@ -25,27 +26,38 @@
 
     private async Task AddRecipe()
     {
-        try
+        if (ValidBeforeAdding())
         {
-            await Service.AddRecipeAsync(newRecipe);
+            try
+            {
+                await Service.AddRecipeAsync(newRecipe);
 
-            ShowPopupMessage = true;
+                ShowSuccessPopupMessage = true;
+                StateHasChanged();
+                await Task.Delay(3000);
+                ShowSuccessPopupMessage = false;
+                StateHasChanged();
+
+                // Reset newRecipe to a fresh instance
+                newRecipe = new Recipe()
+                    {
+                        Ingredients = Enumerable.Range(0, 1)
+                                    .Select(_ => new Ingredient())
+                                    .ToList()
+                    };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+        else
+        {
+            ShowFailPopupMessage = true;
             StateHasChanged();
             await Task.Delay(3000);
-            ShowPopupMessage = false;
+            ShowFailPopupMessage = false;
             StateHasChanged();
-
-            // Reset newRecipe to a fresh instance
-            newRecipe = new Recipe()
-                {
-                    Ingredients = Enumerable.Range(0, 1)
-                        .Select(_ => new Ingredient())
-                        .ToList()
-                };
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
         }
     }
 
@@ -63,6 +75,15 @@
             newRecipe.Ingredients[0] = new Ingredient();
         }
 
+    }
+    private bool ValidBeforeAdding()
+    {
+        if (newRecipe.Name == null)
+            return false;
+        foreach (var ingredient in newRecipe.Ingredients)
+            if (ingredient.Value == 0 || ingredient.Type == "")
+                return false;
+        return true;
     }
 
 }
@@ -125,9 +146,13 @@ else
         <h1></h1>
         <button type="submit" class="btn btn-primary">Add Recipe</button>
 
-        @if (ShowPopupMessage)
+        @if (ShowSuccessPopupMessage)
         {
             <div class="popup">Recipe was added successfully!</div>
+        }
+        @if (ShowFailPopupMessage)
+        {
+            <div class="popup">Recipe can not be added! (Fill the Name and Ingredients fields.)</div>
         }
 
  
@@ -158,7 +183,7 @@ else
         top: 10px; /* Position it near the top of the page */
         left: 50%; /* Center horizontally */
         transform: translateX(-50%); /* Adjust for perfect centering */
-        background-color: #bd9100; /* Warm orange #FFA500 */
+        background-color: #bd3300; /* Warm orange #FFA500 */
         color: #FFFFFF; /* White text for visibility */
         padding: 10px 20px;
         border-radius: 5px;
