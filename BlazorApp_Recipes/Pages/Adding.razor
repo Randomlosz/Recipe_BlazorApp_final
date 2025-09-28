@@ -22,7 +22,7 @@
     private IEnumerable<string> SortedItems => CategoryType.Where(item => item != "Other") 
                                                                     .OrderBy(item => item)         
                                                                     .Concat(CategoryType.Where(item => item == "Other"));
-                                                                       
+
     private async Task AddRecipe()
     {
         try
@@ -47,6 +47,22 @@
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
+    }
+
+    private async Task HandleClickAddIngredient()
+    {
+        newRecipe.Ingredients.Add(new Ingredient());
+    }
+    private async Task HandleClickRemoveIngredient()
+    {
+        Ingredient lastIngredient = newRecipe.Ingredients[newRecipe.Ingredients.Count - 1];
+        if(newRecipe.Ingredients.Count > 1)
+            newRecipe.Ingredients.Remove(lastIngredient);
+        else if (newRecipe.Ingredients.Count == 1)
+        {
+            newRecipe.Ingredients[0] = new Ingredient();
+        }
+
     }
 
 }
@@ -101,7 +117,11 @@ else
             }
         </div>
 
-
+        <div class="d-flex justify-content-center mt-3">
+            <h1></h1>
+            <button type="button" class="btn btn-secondary me-2" @onclick="HandleClickRemoveIngredient">(-) Need Less Ingredient</button>
+            <button type="button" class="btn btn-secondary" @onclick="HandleClickAddIngredient">(+) Need More Ingredient</button>
+        </div>
         <h1></h1>
         <button type="submit" class="btn btn-primary">Add Recipe</button>
 
