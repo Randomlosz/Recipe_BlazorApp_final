@@ -11,10 +11,16 @@
     private bool ShowSuccessPopupMessage = false;
     private bool ShowFailPopupMessage = false;
 
+    private Recipe originalRecipe = new Recipe();
     private Recipe newRecipe = new Recipe();
     protected override async Task OnInitializedAsync()
     {
-        newRecipe = Service.CloneRecipe(await Service.GetRecipeByIdAsync(id));
+        originalRecipe = await Service.GetRecipeByIdAsync(id);
+        newRecipe.Ingredients = Enumerable
+            .Range(0, originalRecipe.Ingredients.Count)
+            .Select(_ => new Ingredient())
+            .ToList();
+        Service.CopyRecipeData(originalRecipe, newRecipe);
     }
 
     List<string> CategoryType => Service.CategoryTypes;
@@ -28,7 +34,8 @@
         {
             try
             {
-                await Service.UpdateRecipeAsync(newRecipe);
+                Service.CopyRecipeData(newRecipe, originalRecipe);
+                await Service.UpdateRecipeAsync(originalRecipe);
 
                 ShowSuccessPopupMessage = true;
                 StateHasChanged();
