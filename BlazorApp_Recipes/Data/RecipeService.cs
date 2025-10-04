@@ -27,24 +27,25 @@ namespace BlazorApp_Recipes.Data
                 }
         }
 
-        public Recipe CloneRecipe(Recipe source)
+        public void CopyRecipeData(Recipe source, Recipe target)
         {
-            return new Recipe
+            target.Name = source.Name;
+            target.Category = source.Category;
+            target.Note = source.Note;
+            target.Servings = source.Servings;
+
+            if (source.Ingredients.Count != target.Ingredients.Count)
+                throw new InvalidOperationException("Source and target must have the same number of ingredients.");
+
+            for (int i = 0; i < source.Ingredients.Count; i++)
             {
-                Id = source.Id,
-                Name = source.Name,
-                Category = source.Category,
-                Note = source.Note,
-                Servings = source.Servings,
-                Ingredients = source.Ingredients
-                    .Select(i => new Ingredient
-                    {
-                        Id = i.Id,
-                        Value = i.Value,
-                        Unit = i.Unit,
-                        Type = i.Type
-                    }).ToList()
-            };
+                var sourceIngredient = source.Ingredients[i];
+                var targetIngredient = target.Ingredients[i];
+
+                targetIngredient.Value = sourceIngredient.Value;
+                targetIngredient.Unit = sourceIngredient.Unit;
+                targetIngredient.Type = sourceIngredient.Type;
+            }
         }
 
         //------------------------------------------------
