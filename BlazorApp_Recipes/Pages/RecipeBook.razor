@@ -41,7 +41,10 @@ else
                     <td>@recipe.Note</td>
                     <td>@string.Join(", ", recipe.GetIngredients())</td>
                     <td>
-                        <div class="d-flex">                          
+                        <div class="d-flex">
+                            <button class="btn btn-warning btn-sm me-1" data-bs-toggle="tooltip" title="View Details" @onclick="() => ViewRecipeDetails(recipe.Id)">
+                                <i class="fas fa-eye"></i>
+                            </button>
                             <button class="btn btn-primary btn-sm me-1" data-bs-toggle="tooltip" title="Edit" @onclick="() => EditRecipe(recipe.Id)">
                                 <i class="fas fa-pen"></i>
                             </button>
@@ -123,8 +126,12 @@ else
     void EditRecipe(int id)
     {
         Navigation.NavigateTo($"/edit/{id}");
-
     }
+    void ViewRecipeDetails(int id)
+    {
+        Navigation.NavigateTo($"/details/{id}");
+    }
+
 
 }
 
