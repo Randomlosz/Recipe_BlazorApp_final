@@ -83,6 +83,26 @@ namespace BlazorApp_Recipes.Data
             return await _context.Recipes.Include(r => r.Ingredients).FirstOrDefaultAsync(r => r.Id == id);
         }
 
+        public async Task<List<Recipe>> GetFilteredRecipesAsync(string SearchTerm_Name, string SearchTerm_Note, List<string> categoryList,
+            bool IsAllServings, bool IsMinServings, bool IsEqualServings, bool IsMaxServings, int ServingsInput,
+            bool IsAllIngredient, bool IsMinIngredient, bool IsEqualIngredient, bool IsMaxIngredient, int IngredientInput_Value, string IngredientInput_Unit, string IngredientInput_Type)
+        {
+            return await _context.Recipes
+                .Include(r => r.Ingredients)
+                .Where(item =>
+                    (string.IsNullOrEmpty(SearchTerm_Name) || item.Name.Contains(SearchTerm_Name, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrEmpty(SearchTerm_Note) || (item.Note != null && item.Note.Contains(SearchTerm_Note, StringComparison.OrdinalIgnoreCase))) &&
+                    (IsAllServings || (IsMinServings && item.Servings != null && item.Servings >= ServingsInput) || (IsEqualServings && item.Servings != null && item.Servings == ServingsInput) || (IsMaxServings && item.Servings != null && item.Servings <= ServingsInput)) &&
+                    (item.Category != null && categoryList.Contains(item.Category)) &&
+                    (
+                        IsAllIngredient ||
+                        (IsMinIngredient && item.Ingredients.Any(ingredient => ingredient.Value >= IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type)) ||
+                        (IsEqualIngredient && item.Ingredients.Any(ingredient => ingredient.Value == IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type)) ||
+                        (IsMaxIngredient && item.Ingredients.Any(ingredient => ingredient.Value <= IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type))
+                    )
+                )
+                .ToListAsync();
+        }
         public async Task AddRecipeAsync(Recipe recipe)
         {
             _context.Recipes.Add(recipe);
