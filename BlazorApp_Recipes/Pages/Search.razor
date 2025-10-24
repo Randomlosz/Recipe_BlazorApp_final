@@ -18,6 +18,8 @@
     }
 
     List<PairItem> _options = new List<PairItem>();
+    List<string> unitTypes => Service.UnitTypes;
+
     private List<Recipe> filteredItems = new();
 
 
@@ -69,10 +71,12 @@
                 <RadzenToggleButton Text="Exactly" @bind-Value="IsEqualIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("equal_ingredient"))" />
                 <RadzenToggleButton Text="Up to" @bind-Value="IsMaxIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("max_ingredient"))" />
                 <RadzenNumeric @bind-Value="IngredientInput_Value" Placeholder="4" Style="width: 50px;" />
-                <RadzenTextBox @bind-Value="IngredientInput_Type" Placeholder="kg"/>
-                <RadzenTextBox @bind-Value="IngredientInput_Unit" Placeholder="tomato"/>
+                <RadzenDropDown Data="unitTypes" @bind-Value="IngredientInput_Unit" Placeholder="Select an option"/>
+                <RadzenTextBox @bind-Value="IngredientInput_Type" Placeholder="tomato"/>
             </RadzenStack>
         </div>
+
+
 
 
         <div class="custom-padding">
@@ -131,8 +135,8 @@
     private bool IsMaxIngredient = false;
     private bool IsAllIngredient = true;
     private int IngredientInput_Value;
-    private string IngredientInput_Type;
     private string IngredientInput_Unit;
+    private string IngredientInput_Type;
 
 
     private void ToggleSelection(string mode)

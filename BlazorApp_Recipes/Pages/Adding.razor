@@ -1,10 +1,14 @@
 ﻿@page "/adding"
 @using BlazorApp_Recipes.Data
 @inject RecipeService Service
+@using Radzen
+@using Radzen.Blazor
 
 <PageTitle>Adding new recipe</PageTitle>
 
 @code {
+    List<string> unitTypes => Service.UnitTypes;
+    
     private bool ShowSuccessPopupMessage = false;
     private bool ShowFailPopupMessage = false;
 
@@ -132,7 +136,7 @@ else
             {
                 <div class="input-row">
                     <InputNumber @bind-Value="ingredient.Value" class="form-control input-field" />
-                    <InputText @bind-Value="ingredient.Unit" class="form-control input-field" placeholder="cup(s)" />
+                    <RadzenDropDown Data="unitTypes" @bind-Value="ingredient.Unit" Placeholder="Select an option" />
                     <InputText @bind-Value="ingredient.Type" class="form-control input-field" placeholder="butter" />
                 </div>
             }
