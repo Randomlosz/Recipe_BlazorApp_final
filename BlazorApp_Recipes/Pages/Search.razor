@@ -212,12 +212,25 @@
     }
 
 
-  
+
     private void PerformSearch()
     {
+        List<string> categoryArray = new List<string>();
+        foreach (var item in _options)
+            if (item.IsSelected)
+                categoryArray.Add(item.Category);
+
         filteredItems = recipes.Where(item =>
             (string.IsNullOrEmpty(SearchTerm_Name) || item.Name.Contains(SearchTerm_Name, StringComparison.OrdinalIgnoreCase)) &&
-            (string.IsNullOrEmpty(SearchTerm_Note) || (item.Note != null && item.Note.Contains(SearchTerm_Note, StringComparison.OrdinalIgnoreCase)))
+            (string.IsNullOrEmpty(SearchTerm_Note) || (item.Note != null && item.Note.Contains(SearchTerm_Note, StringComparison.OrdinalIgnoreCase))) &&
+            (IsAllServings || (IsMinServings && item.Servings != null && item.Servings >= ServingsInput) || (IsEqualServings && item.Servings != null && item.Servings == ServingsInput) || (IsMaxServings && item.Servings != null && item.Servings <= ServingsInput)) &&
+            (item.Category != null && categoryArray.Contains(item.Category)) &&
+            (
+                IsAllIngredient ||
+                (IsMinIngredient   && item.Ingredients.Any(ingredient => ingredient.Value >= IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type)) ||
+                (IsEqualIngredient && item.Ingredients.Any(ingredient => ingredient.Value == IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type)) ||
+                (IsMaxIngredient   && item.Ingredients.Any(ingredient => ingredient.Value <= IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type))
+            )
         ).ToList();
 
     }
