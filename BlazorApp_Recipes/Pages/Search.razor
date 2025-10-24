@@ -11,35 +11,70 @@
 <h1>Filtering recipes</h1>
 
 @code {
-    List<string> _options => Service.CategoryTypes;
+    private class PairItem
+    {
+        public string Category { get; set; }
+        public bool IsSelected { get; set; }
+    }
+
+    List<PairItem> _options = new List<PairItem>();
     private List<Recipe> filteredItems = new();
+
+
+    protected override void OnInitialized()
+    {
+        List<string> _options_category = Service.CategoryTypes;
+
+        for (int i = 0; i < _options_category.Count(); i++)
+        {
+            _options.Add(new PairItem {Category=_options_category[i], IsSelected=true });
+        }
+    }
+
 }
 
 <RadzenStack class="rz-p-0 rz-p-md-12">
     <RadzenCard class="rz-p-4" Variant="Variant.Outlined" Gap="8px">
         <div class="custom-padding">
-        Servings
-            <RadzenStack Orientation="Orientation.Horizontal" Gap="16px">
-            <RadzenToggleButton Text="At least" @bind-Value="IsMin" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("min"))" />
-            <RadzenToggleButton Text="Exactly" @bind-Value="IsEqual" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("equal"))" />
-            <RadzenToggleButton Text="Up to" @bind-Value="IsMax" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("max"))" />
+            Name
+            <RadzenStack Orientation="Orientation.Horizontal">
+                <input type="text" @bind="SearchTerm_Name" placeholder="Search..." />
             </RadzenStack>
         </div>
         <div class="custom-padding">
-        Category
-            <RadzenStack Orientation="Orientation.Horizontal" Gap="16px">             
+            Category
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="4px">
+                <RadzenToggleButton Text="All" @bind-Value="IsAllCategory" ToggleButtonStyle="ButtonStyle.Secondary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("all_category"))" />
                 @foreach (var option in _options)
                 {
-                <RadzenToggleButton ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.Small">@option</RadzenToggleButton>
+                    <RadzenToggleButton @bind-Value="option.IsSelected" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall">@option.Category</RadzenToggleButton>
                 }
             </RadzenStack>
         </div>
         <div class="custom-padding">
-        Name
-            <RadzenStack Orientation="Orientation.Horizontal">               
-                <input type="text" @bind="SearchTerm_Name" placeholder="Search..." />
-            </RadzenStack> 
+        Servings
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="4px">
+                <RadzenToggleButton Text="All" @bind-Value="IsAllServings" ToggleButtonStyle="ButtonStyle.Secondary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("all_servings"))" />
+                <RadzenToggleButton Text="At least" @bind-Value="IsMinServings" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("min"))" />
+                <RadzenToggleButton Text="Exactly" @bind-Value="IsEqualServings" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("equal"))" />
+                <RadzenToggleButton Text="Up to" @bind-Value="IsMaxServings" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("max"))" />
+                <RadzenNumeric @bind-Value="ServingsInput" Placeholder="4" Style="width: 50px;" />
+            </RadzenStack>
         </div>
+        <div class="custom-padding">
+        Ingredient
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="4px">
+                <RadzenToggleButton Text="All" @bind-Value="IsAllIngredient" ToggleButtonStyle="ButtonStyle.Secondary" Variant="Variant.Filled" Size="ButtonSize.Small" Change="@(() => ToggleSelection("all_ingredient"))" />
+                <RadzenToggleButton Text="At least" @bind-Value="IsMinIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("min_ingredient"))" />
+                <RadzenToggleButton Text="Exactly" @bind-Value="IsEqualIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("equal_ingredient"))" />
+                <RadzenToggleButton Text="Up to" @bind-Value="IsMaxIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("max_ingredient"))" />
+                <RadzenNumeric @bind-Value="IngredientInput_Value" Placeholder="4" Style="width: 50px;" />
+                <RadzenTextBox @bind-Value="IngredientInput_Type" Placeholder="kg"/>
+                <RadzenTextBox @bind-Value="IngredientInput_Unit" Placeholder="tomato"/>
+            </RadzenStack>
+        </div>
+
+
         <div class="custom-padding">
         Note
             <RadzenStack Orientation="Orientation.Horizontal">        
@@ -79,34 +114,97 @@
 @code {
     private Recipe[]? recipes;
     protected override async Task OnInitializedAsync() => recipes = (await Service.GetAllRecipesAsync()).ToArray();
-    
+
     private string SearchTerm_Name = "";
     private string SearchTerm_Note = "";
-    private bool IsMin = true;
-    private bool IsEqual= false;
-    private bool IsMax = false;
+
+    private bool IsMinServings = false;
+    private bool IsEqualServings= false;
+    private bool IsMaxServings = false;
+    private bool IsAllServings = true;
+    private int ServingsInput;
+
+    private bool IsAllCategory = true;
+
+    private bool IsMinIngredient = false;
+    private bool IsEqualIngredient= false;
+    private bool IsMaxIngredient = false;
+    private bool IsAllIngredient = true;
+    private int IngredientInput_Value;
+    private string IngredientInput_Type;
+    private string IngredientInput_Unit;
 
 
     private void ToggleSelection(string mode)
     {
         if (mode == "min")
         {
-            IsMin = true;
-            IsEqual = false;
-            IsMax = false;
+            IsMinServings = true;
+            IsEqualServings = false;
+            IsMaxServings = false;
+            IsAllServings = false;
         }
         else if (mode == "equal")
         {
-            IsMin = false;
-            IsEqual = true;
-            IsMax = false;
+            IsMinServings = false;
+            IsEqualServings = true;
+            IsMaxServings = false;
+            IsAllServings = false;
         }
         else if (mode == "max")
         {
-            IsMin = false;
-            IsEqual = false;
-            IsMax = true;
+            IsMinServings = false;
+            IsEqualServings = false;
+            IsMaxServings = true;
+            IsAllServings = false;
         }
+        else if (mode == "all_servings")
+        {
+            IsMinServings = false;
+            IsEqualServings = false;
+            IsMaxServings = false;
+            IsAllServings = true;
+        }
+        else if (mode == "all_category")
+        {
+            if (IsAllCategory)
+            {
+                foreach (var item in _options) item.IsSelected = true;
+            }
+            if(!IsAllCategory)
+            {
+                foreach (var item in _options) item.IsSelected = false;
+            }
+        }
+        if (mode == "min_ingredient")
+        {
+            IsMinIngredient = true;
+            IsEqualIngredient = false;
+            IsMaxIngredient = false;
+            IsAllIngredient = false;
+        }
+        else if (mode == "equal_ingredient")
+        {
+            IsMinIngredient = false;
+            IsEqualIngredient = true;
+            IsMaxIngredient = false;
+            IsAllIngredient = false;
+        }
+        else if (mode == "max_ingredient")
+        {
+            IsMinIngredient = false;
+            IsEqualIngredient = false;
+            IsMaxIngredient = true;
+            IsAllIngredient = false;
+        }
+        else if (mode == "all_ingredient")
+        {
+            IsMinIngredient = false;
+            IsEqualIngredient = false;
+            IsMaxIngredient = false;
+            IsAllIngredient = true;
+        }
+
     }
 
 
