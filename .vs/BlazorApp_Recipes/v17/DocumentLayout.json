@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\pages\\search.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\pages\\search.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\data\\recipe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\data\\recipe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\pages\\adding.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\pages\\adding.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -13,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\data\\recipeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\data\\recipeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\pages\\search.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\pages\\search.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\pages\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -33,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\pages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\pages\\index.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\data\\recipe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|solutionrelative:blazorapp_recipes\\data\\recipe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D316D096-3FA2-4203-A842-B0445FF11255}|BlazorApp_Recipes\\BlazorApp_Recipes.csproj|c:\\users\\renii\\documents\\github\\recipe_blazorapp\\blazorapp_recipes\\pages\\details.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -70,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
@@ -100,13 +100,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "Recipe.cs",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Data\\Recipe.cs",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Data\\Recipe.cs",
               "ToolTip": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Data\\Recipe.cs",
               "RelativeToolTip": "BlazorApp_Recipes\\Data\\Recipe.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAyAAAA",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAIwB4AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-28T12:57:00.57Z",
               "IsPinned": true,
@@ -114,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "RecipeService.cs",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Data\\RecipeService.cs",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Data\\RecipeService.cs",
@@ -123,12 +123,11 @@
               "ViewState": "AQIAAAoAAAAAAAAAAAAAABcAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-28T12:58:23.519Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Adding.razor",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Adding.razor",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\Adding.razor",
@@ -146,19 +145,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "_Host.cshtml",
-              "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\_Host.cshtml",
-              "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\_Host.cshtml",
-              "ToolTip": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\_Host.cshtml",
-              "RelativeToolTip": "BlazorApp_Recipes\\Pages\\_Host.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-24T14:25:54.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 9,
               "Title": "Details.razor",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Details.razor",
@@ -171,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Edit.razor",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Edit.razor",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\Edit.razor",
@@ -179,12 +165,11 @@
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\Edit.razor",
               "ViewState": "AQIAAHgAAAAAAAAAAAAAAIoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-28T14:45:31.808Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-28T14:45:31.808Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\_Layout.cshtml",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\_Layout.cshtml",
@@ -192,21 +177,32 @@
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\_Layout.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-20T07:14:55.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-20T07:14:55.496Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Search.razor",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Search.razor",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\Search.razor",
               "ToolTip": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Search.razor",
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\Search.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "ViewState": "AQIAAMwAAAAAAAAAAAAAANkAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-28T12:53:12.155Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Host.cshtml",
+              "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\_Host.cshtml",
+              "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\_Host.cshtml",
+              "ToolTip": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\_Host.cshtml",
+              "RelativeToolTip": "BlazorApp_Recipes\\Pages\\_Host.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-24T14:25:54.273Z"
             },
             {
               "$type": "Document",
@@ -222,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Index.razor",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Index.razor",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\Index.razor",
@@ -230,12 +226,11 @@
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\Index.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-28T12:47:06.637Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T12:47:06.637Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\appsettings.json",
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\appsettings.json",
@@ -243,8 +238,7 @@
               "RelativeToolTip": "BlazorApp_Recipes\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-03-14T15:02:42.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-14T15:02:42.985Z"
             },
             {
               "$type": "Document",
