@@ -16,8 +16,17 @@ namespace BlazorApp_Recipes.Data
         {
             "milk", "water", "butter", "salt", "sugar", "powdered sugar", "baking-soda", "yeast", "yoghurt", "sour cream", "flour", "orange", "banana", "apple", "meat", "olive oil", "oil"
         };
-        
+        private static readonly List<string> _unitTypes = new List<string>
+        {
+            "mg", "g", "dkg", "kg", "ounce(s)", "pound(s)",
+            "ml", "cl", "dl", "l", 
+            "csp", "tsp", "tbsp","cup(s) of", "fluid ounce(s)", "pint","quart","gallon",
+            "piece(s) of","slice(s) of","clove(s) of", "bulb(s) of","can(s) of","package(s) of", "stick(s) of", "pinch(es)", "dash(es)", "drop(s)"
+        };
+
+
         public List<string> CategoryTypes => _categoryTypes;
+        public List<string> UnitTypes => _unitTypes;
         public List<string> GetIngredientTypes() => _ingredientTypes;
         public void SetIngredientTypes(string value)
         {
@@ -33,9 +42,15 @@ namespace BlazorApp_Recipes.Data
             target.Category = source.Category;
             target.Note = source.Note;
             target.Servings = source.Servings;
-
             if (source.Ingredients.Count != target.Ingredients.Count)
+                target.Ingredients = Enumerable
+                    .Range(0, source.Ingredients.Count)
+                    .Select(_ => new Ingredient())
+                    .ToList();
+
+            if (source.Ingredients.Count != target.Ingredients.Count) {
                 throw new InvalidOperationException("Source and target must have the same number of ingredients.");
+            }
 
             for (int i = 0; i < source.Ingredients.Count; i++)
             {

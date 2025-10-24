@@ -2,6 +2,8 @@
 @using BlazorApp_Recipes.Data
 @inject RecipeService Service
 @inject NavigationManager Navigation
+@using Radzen
+@using Radzen.Blazor
 
 
 <PageTitle>Edit existing recipe</PageTitle>
@@ -9,6 +11,7 @@
 @code {
     [Parameter]
     public int id { get; set; }
+    List<string> unitTypes => Service.UnitTypes;
 
     private bool ShowSuccessPopupMessage = false;
     private bool ShowFailPopupMessage = false;
@@ -18,10 +21,7 @@
     protected override async Task OnInitializedAsync()
     {
         originalRecipe = await Service.GetRecipeByIdAsync(id);
-        newRecipe.Ingredients = Enumerable
-            .Range(0, originalRecipe.Ingredients.Count)
-            .Select(_ => new Ingredient())
-            .ToList();
+
         Service.CopyRecipeData(originalRecipe, newRecipe);
     }
 
@@ -136,7 +136,7 @@ else
             {
                 <div class="input-row">
                     <InputNumber @bind-Value="ingredient.Value" class="form-control input-field" />
-                    <InputText @bind-Value="ingredient.Unit" class="form-control input-field" placeholder="cup(s)" />
+                    <RadzenDropDown Data="unitTypes" @bind-Value="ingredient.Unit" Placeholder="Select an option" />
                     <InputText @bind-Value="ingredient.Type" class="form-control input-field" placeholder="butter" />
                 </div>
             }
