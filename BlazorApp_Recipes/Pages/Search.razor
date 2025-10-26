@@ -60,7 +60,7 @@
                 <RadzenToggleButton Text="At least" @bind-Value="IsMinServings" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("min"))" />
                 <RadzenToggleButton Text="Exactly" @bind-Value="IsEqualServings" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("equal"))" />
                 <RadzenToggleButton Text="Up to" @bind-Value="IsMaxServings" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("max"))" />
-                <RadzenNumeric @bind-Value="ServingsInput" Placeholder="4" Style="width: 50px;" />
+                <RadzenNumeric @bind-Value="ServingsInput" Placeholder="4" Style="width: 100px;" />
             </RadzenStack>
         </div>
         <div class="custom-padding">
@@ -70,7 +70,7 @@
                 <RadzenToggleButton Text="At least" @bind-Value="IsMinIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("min_ingredient"))" />
                 <RadzenToggleButton Text="Exactly" @bind-Value="IsEqualIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("equal_ingredient"))" />
                 <RadzenToggleButton Text="Up to" @bind-Value="IsMaxIngredient" ToggleButtonStyle="ButtonStyle.Primary" Variant="Variant.Filled" Size="ButtonSize.ExtraSmall" Change="@(() => ToggleSelection("max_ingredient"))" />
-                <RadzenNumeric @bind-Value="IngredientInput_Value" Placeholder="4" Style="width: 50px;" />
+                <RadzenNumeric @bind-Value="IngredientInput_Value" Placeholder="4" Style="width: 100px;" />
                 <RadzenDropDown Data="unitTypes" @bind-Value="IngredientInput_Unit" Placeholder="Select an option"/>
                 <RadzenTextBox @bind-Value="IngredientInput_Type" Placeholder="tomato"/>
             </RadzenStack>
