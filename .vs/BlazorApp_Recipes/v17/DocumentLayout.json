@@ -83,8 +83,7 @@
               "ViewState": "AQIAAF0AAAAAAAAAAAAAAHoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-03T13:37:25.642Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -120,7 +119,7 @@
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Data\\RecipeService.cs",
               "ToolTip": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Data\\RecipeService.cs",
               "RelativeToolTip": "BlazorApp_Recipes\\Data\\RecipeService.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAkwFQAAAAAAAAA",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAmwG0AAABuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-28T12:58:23.519Z",
               "IsPinned": true,
@@ -165,8 +164,7 @@
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\Edit.razor",
               "ViewState": "AQIAAHgAAAAAAAAAAAAAAIoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-28T14:45:31.808Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-28T14:45:31.808Z"
             },
             {
               "$type": "Document",
@@ -178,8 +176,7 @@
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\_Layout.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-20T07:14:55.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-20T07:14:55.496Z"
             },
             {
               "$type": "Document",
@@ -189,10 +186,9 @@
               "RelativeDocumentMoniker": "BlazorApp_Recipes\\Pages\\Search.razor",
               "ToolTip": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\Pages\\Search.razor",
               "RelativeToolTip": "BlazorApp_Recipes\\Pages\\Search.razor",
-              "ViewState": "AQIAAHgAAAAAAAAAAAAUwJcAAAAaAAAA",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAAAEgAAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-28T12:53:12.155Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-28T12:53:12.155Z"
             },
             {
               "$type": "Document",

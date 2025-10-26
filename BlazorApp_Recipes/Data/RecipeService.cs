@@ -12,28 +12,48 @@ namespace BlazorApp_Recipes.Data
         {
             "Breakfast/Dinner", "Main Course", "Side-dish", "Dessert", "Baked-goods", "Soup", "Turmix", "Holiday", "Snack", "Other"
         };
-        private static List<string> _ingredientTypes = new List<string>
-        {
-            "milk", "water", "butter", "salt", "sugar", "powdered sugar", "baking-soda", "yeast", "yoghurt", "sour cream", "flour", "orange", "banana", "apple", "meat", "olive oil", "oil"
-        };
-        private static readonly List<string> _unitTypes = new List<string>
-        {
-            "mg", "g", "dkg", "kg", "ounce(s)", "pound(s)",
-            "ml", "cl", "dl", "l", 
-            "csp", "tsp", "tbsp","cup(s) of", "fluid ounce(s)", "pint","quart","gallon",
-            "piece(s) of","slice(s) of","clove(s) of", "bulb(s) of","can(s) of","package(s) of", "stick(s) of", "pinch(es)", "dash(es)", "drop(s)"
-        };
 
+        private static string[] arrayUnitDry = { "mg", "g", "dkg", "kg", "ounce(s)", "pound(s)" };
+        private static string[] arrayUnitLiquid = { "ml", "cl", "dl", "l", "csp", "tsp", "tbsp", "cup(s) of", "fluid ounce(s)", "pint", "quart", "gallon" };
+        private static string[] arrayUnitOther = { "piece(s) of", "slice(s) of", "clove(s) of", "bulb(s) of", "can(s) of", "package(s) of", "stick(s) of", "pinch(es)", "dash(es)", "drop(s)" };
+        private static readonly List<string> _unitTypes = arrayUnitDry.Concat(arrayUnitLiquid).Concat(arrayUnitOther).ToList();
+        private static readonly Dictionary<string, double> unitRatioDry = new()
+        {
+            { "mg", 0.001 },       // 1 mg = 0.001 g
+            { "g", 1 },            // base unit
+            { "dkg", 10 },         // 1 dkg = 10 g
+            { "kg", 1000 },        // 1 kg = 1000 g
+            { "ounce(s)", 28 },    // 1 ounce = 28 g
+            { "pound(s)", 454 }    // 1 pound = 454 g
+        };
+        private static readonly Dictionary<string, double> unitRatioLiquid = new()
+        {
+            { "ml", 1 },               // base unit
+            { "cl", 10 },              // 1 cl = 10 ml
+            { "dl", 100 },             // 1 dl = 100 ml
+            { "l", 1000 },             // 1 l = 1000 ml
+            { "csp", 2 },              // 1 csp = 2 ml
+            { "tsp", 5 },              // 1 tsp = 5 ml
+            { "tbsp", 15 },            // 1 tbsp = 15 ml
+            { "cup(s) of", 237 },      // 1 cup = 237 ml
+            { "fluid ounce(s)", 30 },  // 1 fl oz = 30 ml
+            { "pint", 474 },           // 1 pint = 474 ml
+            { "quart", 948 },          // 1 quart = 948 ml
+            { "gallon", 3792 }         // 1 gallon = 3792 ml
+        };
 
         public List<string> CategoryTypes => _categoryTypes;
         public List<string> UnitTypes => _unitTypes;
-        public List<string> GetIngredientTypes() => _ingredientTypes;
-        public void SetIngredientTypes(string value)
+
+        public double? RecalculateUnit(double inputValue, string inputUnit, string outputUnit) 
         {
-                if (!string.IsNullOrWhiteSpace(value.ToString()))
-                {
-                    _ingredientTypes.Add(value.ToString());
-                }
+            if (arrayUnitDry.Contains(inputUnit) && arrayUnitDry.Contains(outputUnit))           
+                return inputValue * unitRatioDry[inputUnit] / unitRatioDry[outputUnit];
+            
+            if (arrayUnitLiquid.Contains(inputUnit) && arrayUnitLiquid.Contains(outputUnit))
+                return inputValue * unitRatioLiquid[inputUnit] / unitRatioLiquid[outputUnit];
+
+            return null; //recalculation was not possible            
         }
 
         public void CopyRecipeData(Recipe source, Recipe target)
@@ -87,21 +107,25 @@ namespace BlazorApp_Recipes.Data
             bool IsAllServings, bool IsMinServings, bool IsEqualServings, bool IsMaxServings, int ServingsInput,
             bool IsAllIngredient, bool IsMinIngredient, bool IsEqualIngredient, bool IsMaxIngredient, int IngredientInput_Value, string IngredientInput_Unit, string IngredientInput_Type)
         {
-            return await _context.Recipes
+            var initial = await _context.Recipes //server-side filtering for everything else except ingredient
                 .Include(r => r.Ingredients)
                 .Where(item =>
                     (string.IsNullOrEmpty(SearchTerm_Name) || item.Name.Contains(SearchTerm_Name, StringComparison.OrdinalIgnoreCase)) &&
                     (string.IsNullOrEmpty(SearchTerm_Note) || (item.Note != null && item.Note.Contains(SearchTerm_Note, StringComparison.OrdinalIgnoreCase))) &&
                     (IsAllServings || (IsMinServings && item.Servings != null && item.Servings >= ServingsInput) || (IsEqualServings && item.Servings != null && item.Servings == ServingsInput) || (IsMaxServings && item.Servings != null && item.Servings <= ServingsInput)) &&
-                    (item.Category != null && categoryList.Contains(item.Category)) &&
-                    (
-                        IsAllIngredient ||
-                        (IsMinIngredient && item.Ingredients.Any(ingredient => ingredient.Value >= IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type)) ||
-                        (IsEqualIngredient && item.Ingredients.Any(ingredient => ingredient.Value == IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type)) ||
-                        (IsMaxIngredient && item.Ingredients.Any(ingredient => ingredient.Value <= IngredientInput_Value && ingredient.Unit == IngredientInput_Unit && ingredient.Type == IngredientInput_Type))
-                    )
+                    (item.Category != null && categoryList.Contains(item.Category))
                 )
                 .ToListAsync();
+
+            return initial //client-side filtering for ingredient
+            .Where(item =>
+                    IsAllIngredient ||
+                    (IsMinIngredient   && item.Ingredients.Any(ingredient => RecalculateUnit(IngredientInput_Value, IngredientInput_Unit, ingredient.Unit) != null && ingredient.Value >= RecalculateUnit(IngredientInput_Value, IngredientInput_Unit, ingredient.Unit) && ingredient.Type == IngredientInput_Type)) ||
+                    (IsEqualIngredient && item.Ingredients.Any(ingredient => RecalculateUnit(IngredientInput_Value, IngredientInput_Unit, ingredient.Unit) != null && ingredient.Value == RecalculateUnit(IngredientInput_Value, IngredientInput_Unit, ingredient.Unit) && ingredient.Type == IngredientInput_Type)) ||
+                    (IsMaxIngredient   && item.Ingredients.Any(ingredient => RecalculateUnit(IngredientInput_Value, IngredientInput_Unit, ingredient.Unit) != null && ingredient.Value <= RecalculateUnit(IngredientInput_Value, IngredientInput_Unit, ingredient.Unit) && ingredient.Type == IngredientInput_Type))
+            )
+            .ToList();
+                
         }
         public async Task AddRecipeAsync(Recipe recipe)
         {
