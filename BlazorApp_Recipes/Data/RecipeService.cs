@@ -13,10 +13,6 @@ namespace BlazorApp_Recipes.Data
             "Breakfast/Dinner", "Main Course", "Side-dish", "Dessert", "Baked-goods", "Soup", "Turmix", "Holiday", "Snack", "Other"
         };
 
-        private static string[] arrayUnitDry = { "mg", "g", "dkg", "kg", "ounce(s)", "pound(s)" };
-        private static string[] arrayUnitLiquid = { "ml", "cl", "dl", "l", "csp", "tsp", "tbsp", "cup(s) of", "fluid ounce(s)", "pint", "quart", "gallon" };
-        private static string[] arrayUnitOther = { "piece(s) of", "slice(s) of", "clove(s) of", "bulb(s) of", "can(s) of", "package(s) of", "stick(s) of", "pinch(es)", "dash(es)", "drop(s)" };
-        private static readonly List<string> _unitTypes = arrayUnitDry.Concat(arrayUnitLiquid).Concat(arrayUnitOther).ToList();
         private static readonly Dictionary<string, double> unitRatioDry = new()
         {
             { "mg", 0.001 },       // 1 mg = 0.001 g
@@ -41,6 +37,11 @@ namespace BlazorApp_Recipes.Data
             { "quart", 948 },          // 1 quart = 948 ml
             { "gallon", 3792 }         // 1 gallon = 3792 ml
         };
+        private static string[] arrayUnitDry = unitRatioDry.Select(it => it.Key).ToArray(); 
+        private static string[] arrayUnitLiquid = unitRatioLiquid.Select(it => it.Key).ToArray();
+        private static string[] arrayUnitOther = { "piece(s) of", "slice(s) of", "clove(s) of", "bulb(s) of", "can(s) of", "package(s) of", "stick(s) of", "pinch(es)", "dash(es)", "drop(s)" };
+        private static readonly List<string> _unitTypes = arrayUnitDry.Concat(arrayUnitLiquid).Concat(arrayUnitOther).ToList();
+
 
         public List<string> CategoryTypes => _categoryTypes;
         public List<string> UnitTypes => _unitTypes;
