@@ -1,0 +1,27 @@
+﻿@page "/grocery_catalog"
+@using BlazorApp_Recipes.Data
+@inject RecipeService Service
+@inject GroceryCatalogService CatalogService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<PageTitle>Grocery Catalog</PageTitle>
+
+<h1>Grocery Catalog</h1>
+
+<p>Here you can see all the groceries available in the store.</p>
+
+
+@foreach (var section in CatalogService.GroceryCatalog)
+{
+    <h3>@(section.Key)</h3>
+    <ul>
+        @foreach (var item in section.Value)
+        {
+            <li>@(item)</li>
+        }
+    </ul>
+}
+
+
+

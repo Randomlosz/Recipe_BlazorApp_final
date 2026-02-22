@@ -65,6 +65,10 @@
       "PackagePath": "staticwebassets\\images\\a-toast.png"
     },
     {
+      "Id": "C:\\Users\\Renii\\Documents\\GitHub\\Recipe_BlazorApp\\BlazorApp_Recipes\\wwwroot\\images\\map.png",
+      "PackagePath": "staticwebassets\\images\\map.png"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BlazorApp_Recipes.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
