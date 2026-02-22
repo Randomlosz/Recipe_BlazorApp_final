@@ -1,0 +1,613 @@
+section_name,item_name
+Produce,Red apples
+Produce,Green apples
+Produce,Gala apples
+Produce,Fuji apples
+Produce,Golden apples
+Produce,Bananas
+Produce,Plantains
+Produce,Oranges
+Produce,Blood oranges
+Produce,Tangerines
+Produce,Clementines
+Produce,Lemons
+Produce,Limes
+Produce,Grapefruit
+Produce,Pineapple
+Produce,Mango
+Produce,Papaya
+Produce,Kiwi fruits
+Produce,Watermelon
+Produce,Cantaloupe melon
+Produce,Honeydew melon
+Produce,Grapes red seedless
+Produce,Grapes green seedless
+Produce,Strawberries
+Produce,Blueberries
+Produce,Raspberries
+Produce,Blackberries
+Produce,Cherries
+Produce,Plums
+Produce,Peaches
+Produce,Nectarines
+Produce,Apricots
+Produce,Pears
+Produce,Pomegranates
+Produce,Avocados
+Produce,Tomatoes
+Produce,Cherry tomatoes
+Produce,Plum tomatoes
+Produce,Heirloom tomatoes
+Produce,Cucumbers
+Produce,Mini cucumbers
+Produce,Red bell peppers
+Produce,Yellow bell peppers
+Produce,Green bell peppers
+Produce,Orange bell peppers
+Produce,Chili peppers
+Produce,Jalapenos
+Produce,Habaneros
+Produce,Carrots
+Produce,Baby carrots
+Produce,Broccoli
+Produce,Cauliflower
+Produce,Spinach leaves
+Produce,Kale leaves
+Produce,Iceberg lettuce
+Produce,Romaine lettuce
+Produce,Butterhead lettuce
+Produce,Arugula
+Produce,Mixed salad greens
+Produce,White cabbage
+Produce,Red cabbage
+Produce,Purple cabbage
+Produce,Brussels sprouts
+Produce,Green beans
+Produce,Snow peas
+Produce,Sugar snap peas
+Produce,Asparagus green
+Produce,Asparagus white
+Produce,Leeks
+Produce,Spring onions
+Produce,Red onions
+Produce,Yellow onions
+Produce,White onions
+Produce,Shallots
+Produce,Garlic bulbs
+Produce,Ginger root
+Produce,Turmeric root
+Produce,Fresh parsley
+Produce,Fresh basil
+Produce,Fresh dill
+Produce,Fresh coriander
+Produce,Fresh mint
+Produce,Fresh rosemary
+Produce,Fresh thyme
+Produce,Fresh oregano
+Produce,Fresh chives
+Produce,Fresh sage
+Produce,Fresh tarragon
+Produce,Fresh lemongrass
+Produce,Fresh mushrooms
+Produce,Button mushrooms
+Produce,Portobello mushrooms
+Produce,Shiitake mushrooms
+Produce,Oyster mushrooms
+Produce,Zucchini
+Produce,Yellow squash
+Produce,Butternut squash
+Produce,Spaghetti squash
+Produce,Pumpkin
+Produce,Potatoes
+Produce,Sweet potatoes
+Produce,Red potatoes
+Produce,Baby potatoes
+Produce,Beetroots
+Produce,Turnips
+Produce,Parsnips
+Produce,Radishes
+Produce,Celery stalks
+Produce,Fennel bulbs
+Produce,Okra
+Produce,Artichokes
+Produce,Daikon radish
+Produce,Bok choy
+Produce,Napa cabbage
+Produce,Lotus root
+Produce,Edamame pods
+Bakery,White bread loaf
+Bakery,Wholegrain bread loaf
+Bakery,Rye bread loaf
+Bakery,Sourdough bread loaf
+Bakery,Baguette
+Bakery,Brioche loaf
+Bakery,Multigrain rolls
+Bakery,Hamburger buns
+Bakery,Hot dog buns
+Bakery,Pita bread
+Bakery,Wheat tortillas
+Bakery,Corn tortillas
+Bakery,Flatbread
+Bakery,Naan bread
+Bakery,Focaccia
+Bakery,Croissants
+Bakery,Chocolate croissants
+Bakery,Butter croissants
+Bakery,Pretzels
+Bakery,Donuts
+Bakery,Muffins blueberry
+Bakery,Muffins chocolate
+Bakery,Muffins banana
+Bakery,Cinnamon rolls
+Bakery,Apple strudel
+Bakery,Danish pastries
+Bakery,Gluten-free bread loaf
+Bakery,Gluten-free rolls
+Bakery,Gluten-free tortillas
+Bakery,Panettone
+Bakery,Challah bread
+Bakery,English muffins
+Bakery,Bagels plain
+Bakery,Bagels sesame
+Bakery,Bagels everything
+Bakery,Crackers salted
+Bakery,Crackers wholegrain
+Bakery,Breadsticks
+Bakery,Garlic bread
+Deli,Cooked ham slices
+Deli,Smoked ham slices
+Deli,Turkey breast slices
+Deli,Smoked turkey slices
+Deli,Salami slices
+Deli,Pepperoni slices
+Deli,Prosciutto crudo
+Deli,Prosciutto cotto
+Deli,Mortadella
+Deli,Chorizo sausage
+Deli,Roast beef slices
+Deli,Pastrami slices
+Deli,Gouda cheese slices
+Deli,Edam cheese slices
+Deli,Cheddar cheese slices
+Deli,Swiss cheese slices
+Deli,Provolone cheese slices
+Deli,Mozzarella cheese block
+Deli,Mozzarella fresh ball
+Deli,Feta cheese block
+Deli,Goat cheese log
+Deli,Blue cheese wedge
+Deli,Parmesan cheese wedge
+Deli,Grana Padano wedge
+Deli,Halloumi cheese
+Deli,Cream cheese spread
+Deli,Hummus classic
+Deli,Hummus roasted pepper
+Deli,Hummus garlic
+Deli,Olive tapenade
+Deli,Pesto spread
+Deli,Stuffed olives
+Deli,Pickled cucumbers
+Deli,Pickled onions
+Deli,Kimchi
+Deli,Sauerkraut
+Deli,Ready-made sandwiches
+Deli,Ready-made wraps
+Deli,Ready-made salads
+Meat & Fish,Chicken breast fillets
+Meat & Fish,Chicken thigh pieces
+Meat & Fish,Chicken drumsticks
+Meat & Fish,Chicken wings
+Meat & Fish,Whole chicken
+Meat & Fish,Chicken liver
+Meat & Fish,Chicken hearts
+Meat & Fish,Turkey breast fillets
+Meat & Fish,Turkey legs
+Meat & Fish,Turkey wings
+Meat & Fish,Pork loin roast
+Meat & Fish,Pork shoulder roast
+Meat & Fish,Pork chops
+Meat & Fish,Pork belly
+Meat & Fish,Pork ribs
+Meat & Fish,Pork tenderloin
+Meat & Fish,Beef sirloin steak
+Meat & Fish,Beef ribeye steak
+Meat & Fish,Beef rump steak
+Meat & Fish,Beef minced meat
+Meat & Fish,Beef stew cubes
+Meat & Fish,Beef brisket
+Meat & Fish,Beef short ribs
+Meat & Fish,Lamb chops
+Meat & Fish,Lamb leg roast
+Meat & Fish,Lamb shoulder
+Meat & Fish,Lamb minced meat
+Meat & Fish,Fresh salmon fillets
+Meat & Fish,Fresh cod fillets
+Meat & Fish,Fresh trout
+Meat & Fish,Fresh tilapia fillets
+Meat & Fish,Fresh mackerel
+Meat & Fish,Fresh sardines
+Meat & Fish,Fresh tuna steak
+Meat & Fish,Raw shrimp
+Meat & Fish,Cooked shrimp
+Meat & Fish,Frozen shrimp
+Meat & Fish,Frozen mussels
+Meat & Fish,Frozen calamari rings
+Meat & Fish,Frozen fish sticks
+Meat & Fish,Frozen breaded fish fillets
+Meat & Fish,Smoked salmon
+Meat & Fish,Smoked trout
+Meat & Fish,Smoked mackerel
+Meat & Fish,Smoked sausages
+Meat & Fish,Frankfurter sausages
+Meat & Fish,Chorizo sausage
+Meat & Fish,Italian sausage
+Meat & Fish,Bratwurst
+Meat & Fish,Hot dogs
+Meat & Fish,Tofu firm
+Meat & Fish,Tofu soft
+Meat & Fish,Tempeh
+Meat & Fish,Plant-based burger patties
+Meat & Fish,Plant-based sausages
+Dairy,Whole milk
+Dairy,Semi-skimmed milk
+Dairy,Skimmed milk
+Dairy,Lactose-free milk
+Dairy,Organic milk
+Dairy,Goat milk
+Dairy,Sheep milk
+Dairy,Natural yogurt
+Dairy,Greek yogurt
+Dairy,Skyr yogurt
+Dairy,Flavored yogurt cups
+Dairy,Protein yogurt
+Dairy,Sour cream
+Dairy,Cooking cream
+Dairy,Whipping cream
+Dairy,Double cream
+Dairy,Buttermilk
+Dairy,Salted butter
+Dairy,Unsalted butter
+Dairy,Clarified butter ghee
+Dairy,Margarine spread
+Dairy,Cheddar cheese block
+Dairy,Mozzarella cheese ball
+Dairy,Mozzarella shredded
+Dairy,Feta cheese
+Dairy,Goat cheese
+Dairy,Blue cheese
+Dairy,Parmesan cheese wedge
+Dairy,Grana Padano wedge
+Dairy,Swiss cheese block
+Dairy,Edam cheese block
+Dairy,Gouda cheese block
+Dairy,Cottage cheese
+Dairy,Cream cheese
+Dairy,Mascarpone cheese
+Dairy,Ricotta cheese
+Dairy,Quark cheese
+Dairy,Eggs medium
+Dairy,Eggs large
+Dairy,Eggs extra large
+Dairy,Free-range eggs
+Dairy,Organic eggs
+Dairy,Almond milk
+Dairy,Soy milk
+Dairy,Oat milk
+Dairy,Rice milk
+Dairy,Coconut milk (refrigerated)
+Frozen,Frozen peas
+Frozen,Frozen corn
+Frozen,Frozen spinach
+Frozen,Frozen broccoli
+Frozen,Frozen cauliflower
+Frozen,Frozen mixed vegetables
+Frozen,Frozen green beans
+Frozen,Frozen edamame
+Frozen,Frozen berries mix
+Frozen,Frozen strawberries
+Frozen,Frozen blueberries
+Frozen,Frozen raspberries
+Frozen,Frozen mango chunks
+Frozen,Frozen pineapple chunks
+Frozen,Frozen pizza margherita
+Frozen,Frozen pizza pepperoni
+Frozen,Frozen pizza veggie
+Frozen,Frozen lasagna
+Frozen,Frozen chicken nuggets
+Frozen,Frozen chicken wings
+Frozen,Frozen chicken breast strips
+Frozen,Frozen fish sticks
+Frozen,Frozen breaded fish fillets
+Frozen,Frozen shrimp
+Frozen,Frozen mussels
+Frozen,Frozen calamari rings
+Frozen,Frozen dumplings
+Frozen,Frozen spring rolls
+Frozen,Frozen samosas
+Frozen,Frozen french fries
+Frozen,Frozen potato wedges
+Frozen,Frozen hash browns
+Frozen,Frozen mashed potato
+Frozen,Frozen garlic bread
+Frozen,Frozen waffles
+Frozen,Frozen pancakes
+Frozen,Frozen ice cream vanilla
+Frozen,Frozen ice cream chocolate
+Frozen,Frozen ice cream strawberry
+Frozen,Frozen sorbet lemon
+Frozen,Frozen sorbet mango
+Pasta & Rice,Long-grain white rice
+Pasta & Rice,Basmati rice
+Pasta & Rice,Jasmine rice
+Pasta & Rice,Brown rice
+Pasta & Rice,Risotto rice
+Pasta & Rice,Sushi rice
+Pasta & Rice,Wild rice
+Pasta & Rice,Bulgur wheat
+Pasta & Rice,Couscous
+Pasta & Rice,Quinoa white
+Pasta & Rice,Quinoa red
+Pasta & Rice,Quinoa tricolor
+Pasta & Rice,Barley
+Pasta & Rice,Millet
+Pasta & Rice,Buckwheat groats
+Pasta & Rice,Oats rolled
+Pasta & Rice,Oats instant
+Pasta & Rice,Cornflakes cereal
+Pasta & Rice,Muesli mix
+Pasta & Rice,Granola mix
+Pasta & Rice,Spaghetti pasta
+Pasta & Rice,Penne pasta
+Pasta & Rice,Fusilli pasta
+Pasta & Rice,Macaroni pasta
+Pasta & Rice,Rigatoni pasta
+Pasta & Rice,Lasagna sheets
+Pasta & Rice,Gluten-free pasta
+Pasta & Rice,Rice noodles
+Pasta & Rice,Udon noodles
+Pasta & Rice,Soba noodles
+Pasta & Rice,Ramen noodles
+Pasta & Rice,Pesto sauce jar
+Pasta & Rice,Alfredo sauce jar
+Pasta & Rice,Soy sauce
+Pasta & Rice,Teriyaki sauce
+Pasta & Rice,Worcestershire sauce
+Pasta & Rice,Hot chili sauce
+Pasta & Rice,Sriracha sauce
+Pasta & Rice,BBQ sauce
+Pasta & Rice,Ketchup
+Pasta & Rice,Mayonnaise
+Pasta & Rice,Mustard yellow
+Pasta & Rice,Mustard Dijon
+Pasta & Rice,Strawberry jam
+Pasta & Rice,Apricot jam
+Pasta & Rice,Blueberry jam
+Pasta & Rice,Honey
+Pasta & Rice,Maple syrup
+Pasta & Rice,Molasses
+Pasta & Rice,Olive oil extra virgin
+Pasta & Rice,Sunflower oil
+Pasta & Rice,Coconut oil
+Pasta & Rice,Sesame oil
+Pasta & Rice,Canola oil
+Pasta & Rice,Vinegar white
+Pasta & Rice,Vinegar apple cider
+Pasta & Rice,Vinegar balsamic
+Pasta & Rice,Vinegar red wine
+Pasta & Rice,Vinegar rice
+Pasta & Rice,Peanut butter smooth
+Pasta & Rice,Peanut butter crunchy
+Pasta & Rice,Almond butter
+Pasta & Rice,Tahini
+Flour & Spice & Sugar,Wheat flour
+Flour & Spice & Sugar,All-purpose flour
+Flour & Spice & Sugar,Bread flour
+Flour & Spice & Sugar,Cake flour
+Flour & Spice & Sugar,Gluten-free flour
+Flour & Spice & Sugar,Cornmeal
+Flour & Spice & Sugar,Semolina
+Flour & Spice & Sugar,Granulated sugar
+Flour & Spice & Sugar,Brown sugar
+Flour & Spice & Sugar,Icing sugar
+Flour & Spice & Sugar,Coconut sugar
+Flour & Spice & Sugar,Stevia sweetener
+Flour & Spice & Sugar,Table salt
+Flour & Spice & Sugar,Sea salt
+Flour & Spice & Sugar,Himalayan pink salt
+Flour & Spice & Sugar,Black pepper whole
+Flour & Spice & Sugar,Black pepper ground
+Flour & Spice & Sugar,White pepper ground
+Flour & Spice & Sugar,Sweet paprika powder
+Flour & Spice & Sugar,Hot paprika powder
+Flour & Spice & Sugar,Smoked paprika powder
+Flour & Spice & Sugar,Oregano seasoning
+Flour & Spice & Sugar,Basil seasoning
+Flour & Spice & Sugar,Thyme seasoning
+Flour & Spice & Sugar,Rosemary seasoning
+Flour & Spice & Sugar,Sage seasoning
+Flour & Spice & Sugar,Curry powder
+Flour & Spice & Sugar,Turmeric powder
+Flour & Spice & Sugar,Cumin powder
+Flour & Spice & Sugar,Coriander powder
+Flour & Spice & Sugar,Cinnamon ground
+Flour & Spice & Sugar,Nutmeg ground
+Flour & Spice & Sugar,Cloves whole
+Flour & Spice & Sugar,Cardamom pods
+Flour & Spice & Sugar,Chili flakes
+Flour & Spice & Sugar,Chili powder
+Flour & Spice & Sugar,Five-spice powder
+Flour & Spice & Sugar,Garam masala
+Flour & Spice & Sugar,Italian herb mix
+Flour & Spice & Sugar,Herbes de Provence
+Flour & Spice & Sugar,Baking powder
+Flour & Spice & Sugar,Baking soda
+Flour & Spice & Sugar,Dry yeast
+Flour & Spice & Sugar,Cocoa powder
+Flour & Spice & Sugar,Vanilla sugar
+Flour & Spice & Sugar,Vanilla extract
+Flour & Spice & Sugar,Stock cubes chicken
+Flour & Spice & Sugar,Stock cubes beef
+Flour & Spice & Sugar,Stock cubes vegetable
+Flour & Spice & Sugar,Breadcrumbs
+Flour & Spice & Sugar,Panko breadcrumbs
+Canned Goods,Tomato paste
+Canned Goods,Tomato sauce jar
+Canned Goods,Tomato puree
+Canned Goods,Crushed tomatoes can
+Canned Goods,Diced tomatoes can
+Canned Goods,Whole peeled tomatoes can
+Canned Goods,Canned sweet corn
+Canned Goods,Canned green peas
+Canned Goods,Canned red kidney beans
+Canned Goods,Canned chickpeas
+Canned Goods,Canned black beans
+Canned Goods,Canned lentils
+Canned Goods,Canned mushrooms
+Canned Goods,Canned pineapple
+Canned Goods,Canned peaches
+Canned Goods,Canned pears
+Canned Goods,Canned tuna in oil
+Canned Goods,Canned tuna in water
+Canned Goods,Canned sardines
+Canned Goods,Canned mackerel
+Canned Goods,Canned salmon
+Canned Goods,Instant soup chicken
+Canned Goods,Instant soup tomato
+Canned Goods,Instant noodles chicken
+Canned Goods,Instant noodles beef
+Canned Goods,Instant noodles spicy
+Snacks & Sweets,Milk chocolate bar
+Snacks & Sweets,Dark chocolate bar
+Snacks & Sweets,White chocolate bar
+Snacks & Sweets,Chocolate with nuts
+Snacks & Sweets,Chocolate wafers
+Snacks & Sweets,Chocolate chip cookies
+Snacks & Sweets,Oat cookies
+Snacks & Sweets,Butter biscuits
+Snacks & Sweets,Shortbread cookies
+Snacks & Sweets,Gingerbread cookies
+Snacks & Sweets,Pretzel sticks
+Snacks & Sweets,Crackers salted
+Snacks & Sweets,Crackers wholegrain
+Snacks & Sweets,Paprika potato chips
+Snacks & Sweets,Salted potato chips
+Snacks & Sweets,Cheese-flavored chips
+Snacks & Sweets,Tortilla chips
+Snacks & Sweets,Popcorn salted
+Snacks & Sweets,Popcorn sweet
+Snacks & Sweets,Trail mix
+Snacks & Sweets,Mixed nuts
+Snacks & Sweets,Roasted peanuts
+Snacks & Sweets,Almonds roasted
+Snacks & Sweets,Cashews salted
+Snacks & Sweets,Pistachios roasted
+Snacks & Sweets,Dried apricots
+Snacks & Sweets,Raisins
+Snacks & Sweets,Dried cranberries
+Snacks & Sweets,Dried figs
+Snacks & Sweets,Fruit gummies
+Snacks & Sweets,Hard candies
+Snacks & Sweets,Marshmallows
+Snacks & Sweets,Granola bars
+Snacks & Sweets,Protein bars
+Snacks & Sweets,Caramel candies
+Snacks & Sweets,Licorice sticks
+Beverages & Alcohol,Still mineral water
+Beverages & Alcohol,Sparkling mineral water
+Beverages & Alcohol,Distilled water
+Beverages & Alcohol,Flavored water lemon
+Beverages & Alcohol,Flavored water peach
+Beverages & Alcohol,Cola soft drink
+Beverages & Alcohol,Cola zero sugar
+Beverages & Alcohol,Lemon-lime soft drink
+Beverages & Alcohol,Orange soda
+Beverages & Alcohol,Ginger ale
+Beverages & Alcohol,Tonic water
+Beverages & Alcohol,Club soda
+Beverages & Alcohol,Apple juice
+Beverages & Alcohol,Orange juice
+Beverages & Alcohol,Grape juice
+Beverages & Alcohol,Pineapple juice
+Beverages & Alcohol,Cranberry juice
+Beverages & Alcohol,Multivitamin juice
+Beverages & Alcohol,Tomato juice
+Beverages & Alcohol,Peach iced tea
+Beverages & Alcohol,Lemon iced tea
+Beverages & Alcohol,Green iced tea
+Beverages & Alcohol,Energy drink
+Beverages & Alcohol,Isotonic drink
+Beverages & Alcohol,Sports drink
+Beverages & Alcohol,Ground coffee
+Beverages & Alcohol,Instant coffee
+Beverages & Alcohol,Espresso coffee beans
+Beverages & Alcohol,Coffee pods
+Beverages & Alcohol,Black tea bags
+Beverages & Alcohol,Green tea bags
+Beverages & Alcohol,Herbal tea chamomile
+Beverages & Alcohol,Herbal tea peppermint
+Beverages & Alcohol,Herbal tea mixed
+Beverages & Alcohol,Matcha powder
+Beverages & Alcohol,Hot chocolate mix
+Beverages & Alcohol,Milkshake chocolate
+Beverages & Alcohol,Milkshake vanilla
+Beverages & Alcohol,Milkshake strawberry
+Beverages & Alcohol,Kombucha ginger
+Beverages & Alcohol,Kombucha berry
+Beverages & Alcohol,Coconut water
+Beverages & Alcohol,Aloe vera drink
+International,Soy sauce
+International,Teriyaki sauce
+International,Sriracha sauce
+International,Hoisin sauce
+International,Thai curry paste red
+International,Thai curry paste green
+International,Coconut milk canned
+International,Rice noodles
+International,Udon noodles
+International,Soba noodles
+International,Ramen noodles
+International,Kimchi
+International,Miso paste
+International,Nori sheets
+International,Sushi rice
+International,Tortillas corn
+International,Tortillas flour
+International,Refried beans
+International,Salsa mild
+International,Salsa hot
+International,Black bean sauce
+International,Tikka masala sauce
+International,Butter chicken sauce
+International,Chutney mango
+International,Couscous
+International,Harissa paste
+International,Zaatar spice
+International,Tahini
+International,Pita bread
+International,Falafel mix
+International,Hummus classic
+International,Hummus spicy
+Beverages & Alcohol,Beer lager bottle
+Beverages & Alcohol,Beer lager can
+Beverages & Alcohol,Beer IPA bottle
+Beverages & Alcohol,Beer stout bottle
+Beverages & Alcohol,Beer wheat bottle
+Beverages & Alcohol,Red wine merlot
+Beverages & Alcohol,Red wine cabernet sauvignon
+Beverages & Alcohol,Red wine pinot noir
+Beverages & Alcohol,White wine chardonnay
+Beverages & Alcohol,White wine sauvignon blanc
+Beverages & Alcohol,White wine riesling
+Beverages & Alcohol,Rose wine dry
+Beverages & Alcohol,Sparkling wine brut
+Beverages & Alcohol,Champagne brut
+Beverages & Alcohol,Vodka
+Beverages & Alcohol,Gin
+Beverages & Alcohol,Rum white
+Beverages & Alcohol,Rum dark
+Beverages & Alcohol,Whiskey blended
+Beverages & Alcohol,Whiskey single malt
+Beverages & Alcohol,Tequila silver
+Beverages & Alcohol,Tequila gold
+Beverages & Alcohol,Liqueur coffee
+Beverages & Alcohol,Liqueur cream

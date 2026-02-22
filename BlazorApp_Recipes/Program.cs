@@ -15,6 +15,8 @@ builder.Services.AddDbContext<RecipeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlazorApp_RecipesContext"));
 });
 
+builder.Services.AddSingleton<GroceryCatalogService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

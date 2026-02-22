@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Include="wwwroot\images\a-toast.jpg" />
     <None Include="wwwroot\images\a-toast.png" />
+    <None Include="wwwroot\images\map.png" />
   </ItemGroup>
 
   <ItemGroup>
