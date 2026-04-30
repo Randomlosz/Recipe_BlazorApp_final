@@ -30,9 +30,6 @@ namespace BlazorApp_Recipes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -45,8 +42,6 @@ namespace BlazorApp_Recipes.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RecipeId");
 
                     b.ToTable("Ingredient", (string)null);
                 });
@@ -78,20 +73,84 @@ namespace BlazorApp_Recipes.Migrations
                     b.ToTable("Recipe", (string)null);
                 });
 
-            modelBuilder.Entity("BlazorApp_Recipes.Data.Ingredient", b =>
+            modelBuilder.Entity("BlazorApp_Recipes.Data.ShoppingList", b =>
                 {
-                    b.HasOne("BlazorApp_Recipes.Data.Recipe", "Recipe")
-                        .WithMany("Ingredients")
-                        .HasForeignKey("RecipeId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShoppingList", (string)null);
+                });
+
+            modelBuilder.Entity("IngredientRecipe", b =>
+                {
+                    b.Property<int>("IngredientsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IngredientsId", "RecipesId");
+
+                    b.HasIndex("RecipesId");
+
+                    b.ToTable("RecipeIngredients", (string)null);
+                });
+
+            modelBuilder.Entity("IngredientShoppingList", b =>
+                {
+                    b.Property<int>("IngredientsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShoppingListsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IngredientsId", "ShoppingListsId");
+
+                    b.HasIndex("ShoppingListsId");
+
+                    b.ToTable("ShoppingListIngredients", (string)null);
+                });
+
+            modelBuilder.Entity("IngredientRecipe", b =>
+                {
+                    b.HasOne("BlazorApp_Recipes.Data.Ingredient", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Recipe");
+                    b.HasOne("BlazorApp_Recipes.Data.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("BlazorApp_Recipes.Data.Recipe", b =>
+            modelBuilder.Entity("IngredientShoppingList", b =>
                 {
-                    b.Navigation("Ingredients");
+                    b.HasOne("BlazorApp_Recipes.Data.Ingredient", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BlazorApp_Recipes.Data.ShoppingList", null)
+                        .WithMany()
+                        .HasForeignKey("ShoppingListsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
