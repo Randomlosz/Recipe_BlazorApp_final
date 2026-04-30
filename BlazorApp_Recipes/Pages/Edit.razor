@@ -23,6 +23,7 @@
         originalRecipe = await Service.GetRecipeByIdAsync(id);
 
         Service.CopyRecipeData(originalRecipe, newRecipe);
+
     }
 
     List<string> CategoryType => Service.CategoryTypes;
@@ -36,8 +37,7 @@
         {
             try
             {
-                Service.CopyRecipeData(newRecipe, originalRecipe);
-                await Service.UpdateRecipeAsync(originalRecipe);
+                await Service.UpdateRecipeAsync2(newRecipe);
 
                 ShowSuccessPopupMessage = true;
                 StateHasChanged();

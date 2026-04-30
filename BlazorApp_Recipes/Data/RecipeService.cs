@@ -57,7 +57,7 @@ namespace BlazorApp_Recipes.Data
             return null; //recalculation was not possible            
         }
 
-        public void CopyRecipeData(Recipe source, Recipe target)
+        public void CopyRecipeData2(Recipe source, Recipe target)
         {
             target.Name = source.Name;
             target.Category = source.Category;
@@ -78,10 +78,30 @@ namespace BlazorApp_Recipes.Data
                 var sourceIngredient = source.Ingredients[i];
                 var targetIngredient = target.Ingredients[i];
 
+                targetIngredient.Id= sourceIngredient.Id;
                 targetIngredient.Value = sourceIngredient.Value;
                 targetIngredient.Unit = sourceIngredient.Unit;
                 targetIngredient.Type = sourceIngredient.Type;
             }
+        }
+
+        public void CopyRecipeData(Recipe source, Recipe target)
+        {
+            target.Id = source.Id;
+            target.Name = source.Name;
+            target.Category = source.Category;
+            target.Note = source.Note;
+            target.Servings = source.Servings;
+
+            target.Ingredients = source.Ingredients
+                .Select(i => new Ingredient
+                {
+                    Id = i.Id,               // preserve ID
+                    Value = i.Value,
+                    Unit = i.Unit,
+                    Type = i.Type
+                })
+                .ToList();
         }
 
         //------------------------------------------------
@@ -146,6 +166,50 @@ namespace BlazorApp_Recipes.Data
             _context.Recipes.Update(recipe);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateRecipeAsync2(Recipe updatedRecipe)
+        {
+            var recipe = await _context.Recipes
+                .Include(r => r.Ingredients)
+                .FirstOrDefaultAsync(r => r.Id == updatedRecipe.Id);
+
+            recipe.Name = updatedRecipe.Name;
+            recipe.Category = updatedRecipe.Category;
+            recipe.Note = updatedRecipe.Note;
+            recipe.Servings = updatedRecipe.Servings;
+
+            recipe.Ingredients.Clear();
+
+            foreach (var ingredient in updatedRecipe.Ingredients)
+            {
+                Ingredient ingredientToAdd;
+
+                if (ingredient.Id == 0)
+                {
+                    // Create a NEW Ingredient instance so EF will insert it
+                    ingredientToAdd = new Ingredient
+                    {
+                        Value = ingredient.Value,
+                        Unit = ingredient.Unit,
+                        Type = ingredient.Type
+                    };
+
+                    _context.Ingredients.Add(ingredientToAdd);
+                }
+                else
+                {
+                    // Existing ingredient
+                    ingredientToAdd = await _context.Ingredients.FindAsync(ingredient.Id)
+                                     ?? throw new Exception("Ingredient not found");
+
+                    _context.Attach(ingredientToAdd);
+                }
+
+                recipe.Ingredients.Add(ingredientToAdd);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
 
         public async Task DeleteRecipeAsync(int id)
         {
