@@ -1,0 +1,125 @@
+﻿@page "/shopping_list"
+@using BlazorApp_Recipes.Data
+@inject ShoppingListService Service
+@inject GroceryCatalogService CatalogService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<PageTitle>Shopping List</PageTitle>
+
+<h1>Shopping List</h1>
+
+<p>Here you can see your shopping list.</p>
+
+
+@if (shoppinglists == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (!shoppinglists.Any())
+{
+    <p><em>No shoppinglist available.</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Note</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shoppinglist in shoppinglists)
+            {
+                <tr>
+                    <td>@shoppinglist.Name</td>
+                    <td>@shoppinglist.Note</td>
+                    <td>
+                        <div class="d-flex">
+                            <button class="btn btn-warning btn-sm me-1" data-bs-toggle="tooltip" title="View Details" @onclick="() => ViewShoppingListDetails(shoppinglist.Id)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <div data-bs-toggle="tooltip" title="Delete">
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" @onclick="() => PrepareDelete(shoppinglist.Id)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this recipe?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @onclick="DeleteShoppingList">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast align-items-center text-bg-success border-0" id="deleteToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex align-items-center">
+                <img src="/images/a-toast.png" alt="Success" width="132" height="165" class="me-2 mt-1" />
+                <div class="toast-body">
+                    Shopping list deleted successfully.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        function showDeleteToast() {
+            var toastEl = document.getElementById('deleteToast');
+            var toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+    </script>
+}
+
+@code {
+    private ShoppingList[]? shoppinglists;
+    protected override async Task OnInitializedAsync()
+    {
+        shoppinglists = (await Service.GetAllShoppingListsAsync()).ToArray();
+    }
+
+    private int shoppinglistIdToDelete;
+    void PrepareDelete(int id)
+    {
+        shoppinglistIdToDelete = id;
+    }
+    async Task DeleteShoppingList()
+    {
+        await Service.DeleteShoppingListAsync(shoppinglistIdToDelete);
+        await JS.InvokeVoidAsync("showDeleteToast");
+        shoppinglists = (await Service.GetAllShoppingListsAsync()).ToArray();
+        StateHasChanged();
+    }
+    void ViewShoppingListDetails(int id)
+    {
+        Navigation.NavigateTo($"/shopping_list/details/{id}");
+    }
+
+
+}
+
+

@@ -96,7 +96,7 @@ namespace BlazorApp_Recipes.Data
             target.Ingredients = source.Ingredients
                 .Select(i => new Ingredient
                 {
-                    Id = i.Id,               // preserve ID
+                    Id = i.Id,
                     Value = i.Value,
                     Unit = i.Unit,
                     Type = i.Type
@@ -161,12 +161,12 @@ namespace BlazorApp_Recipes.Data
             }
         }
 
-        public async Task UpdateRecipeAsync(Recipe recipe)
+        public async Task UpdateRecipeAsync2(Recipe recipe)
         {
             _context.Recipes.Update(recipe);
             await _context.SaveChangesAsync();
         }
-        public async Task UpdateRecipeAsync2(Recipe updatedRecipe)
+        public async Task UpdateRecipeAsync(Recipe updatedRecipe)
         {
             var recipe = await _context.Recipes
                 .Include(r => r.Ingredients)

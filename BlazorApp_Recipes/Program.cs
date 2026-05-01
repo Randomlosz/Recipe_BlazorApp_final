@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<RecipeService>();
+builder.Services.AddScoped<ShoppingListService>();
 
 builder.Services.AddDbContext<RecipeDbContext>(options =>
 {

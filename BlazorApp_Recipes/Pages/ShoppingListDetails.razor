@@ -1,0 +1,247 @@
+﻿@page "/shopping_list/details/{id:int}"
+@using BlazorApp_Recipes.Data
+@inject ShoppingListService Service
+@inject RecipeService RecipeService
+@inject NavigationManager Navigation
+@using Radzen
+@using Radzen.Blazor
+@inject IJSRuntime JS
+
+
+<PageTitle>Details of existing shopping list</PageTitle>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+    List<string> unitTypes => RecipeService.UnitTypes;
+
+    private bool ShowSuccessPopupMessage = false;
+    private bool ShowFailPopupMessage = false;
+
+    private ShoppingList originalShoppingList;
+    private ShoppingList newShoppingList = new ShoppingList();
+
+    protected override async Task OnInitializedAsync()
+    {
+        originalShoppingList = await Service.GetShoppingListByIdAsync(id);
+        Service.CopyShoppingListData(originalShoppingList, newShoppingList);
+    }
+
+    private async Task EditShoppingList()
+    {
+        if (ValidBeforeEditing())
+        {
+            try
+            {
+                await Service.UpdateShoppingListAsync(newShoppingList);
+
+                ShowSuccessPopupMessage = true;
+                StateHasChanged();
+                await Task.Delay(3000);
+                ShowSuccessPopupMessage = false;
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
+        else
+        {
+            ShowFailPopupMessage = true;
+            StateHasChanged();
+            await Task.Delay(3000);
+            ShowFailPopupMessage = false;
+            StateHasChanged();
+        }
+    }
+
+    private bool ValidBeforeEditing()
+    {
+        if (newShoppingList.Name == null)
+            return false;
+        foreach (var ingredient in newShoppingList.Ingredients)
+            if (ingredient.Value == 0 || ingredient.Type == "")
+                return false;
+        return true;
+    }
+    private void GoBack()
+    {
+        Navigation.NavigateTo("/shopping_list");
+    }
+
+    private async Task HandleClickAddIngredient()
+    {
+        newShoppingList.Ingredients.Add(new Ingredient());
+    }
+    private async Task HandleClickRemoveIngredient()
+    {
+        Ingredient lastIngredient = newShoppingList.Ingredients[newShoppingList.Ingredients.Count - 1];
+        if (newShoppingList.Ingredients.Count > 1)
+            newShoppingList.Ingredients.Remove(lastIngredient);
+        else if (newShoppingList.Ingredients.Count == 1)
+        {
+            newShoppingList.Ingredients[0] = new Ingredient();
+        }
+    }
+
+
+    async Task DeleteIngredient(Ingredient ingredientToDelete)
+    {
+        if (ingredientToDelete != null)
+        {
+            newShoppingList.Ingredients.Remove(ingredientToDelete);
+        }
+        await JS.InvokeVoidAsync("showDeleteToast");
+    }
+
+}
+
+<h1>Details of existing shopping list</h1>
+
+@if (originalShoppingList == null)
+{
+    <p>Loading shopping list details…</p>
+}
+else
+{
+    <div class="card mt-3">
+        <div class="card-header">
+            <h4>@originalShoppingList.Name</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Note:</strong> @originalShoppingList.Note</p>
+            
+            <h5>Items</h5>
+            <ul>
+                @foreach (var ingredient in originalShoppingList.Ingredients)
+                {
+                    <li>@ingredient.Value @ingredient.Unit @ingredient.Type</li>
+                }
+            </ul>
+
+            <div class="mt-3">
+                <button class="btn btn-secondary me-2" @onclick="GoBack">Back</button>
+            </div>
+        </div>
+    </div>
+    <h1></h1>
+
+
+    <EditForm Model="newShoppingList" OnValidSubmit="EditShoppingList">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="field">
+        <label for="name">Name:</label>
+            <InputText id="name" @bind-Value="newShoppingList.Name" class="form-control" />
+    </div>
+
+    <div class="field">
+        <label for="note">Note:</label>
+            <InputText id="note" @bind-Value="newShoppingList.Note" class="form-control" />
+    </div>
+
+    <div class="field">
+        <label for="note">Ingredients:</label>
+            @foreach (var ingredient in newShoppingList.Ingredients)
+        {
+            <div class="input-row">
+                <InputNumber @bind-Value="ingredient.Value" class="form-control input-field" />
+                <RadzenDropDown Data="unitTypes" @bind-Value="ingredient.Unit" Placeholder="Select an option" />
+                <InputText @bind-Value="ingredient.Type" class="form-control input-field" placeholder="butter" />
+                <div data-bs-toggle="tooltip" title="Delete">
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" @onclick="() => DeleteIngredient(ingredient)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <h1></h1>
+        <button type="button" class="btn btn-warning me-2" @onclick="HandleClickRemoveIngredient">(-) Need Less Item</button>
+        <button type="button" class="btn btn-warning" @onclick="HandleClickAddIngredient">(+) Need More Item</button>
+    </div>
+    <h1></h1>
+    <div class="mt-3">
+        <button type="button" class="btn btn-secondary me-2" @onclick="GoBack">Back</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+    @if (ShowSuccessPopupMessage)
+    {
+        <div class="popup-success">Recipe was updated successfully!</div>
+    }
+    @if (ShowFailPopupMessage)
+    {
+        <div class="popup-fail">Recipe can not be updated! (Fill the Name and Ingredients fields.)</div>
+    }
+
+    </EditForm>
+
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast align-items-center text-bg-success border-0" id="deleteToast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex align-items-center">
+                <img src="/images/a-toast.png" alt="Success" width="76" height="82" class="me-2 mt-1" />
+                <div class="toast-body">
+                    Item deleted successfully.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+
+
+<style>
+    .input-row {
+        display: flex;
+        gap: 10px; /* Adjust the gap between input fields as needed */
+        margin-bottom: 10px; /* Add spacing between rows */
+    }
+
+    .input-field {
+        flex: 1;
+    }
+
+    .field {
+        margin-bottom: 15px; /* Add spacing between rows */
+    }
+
+    .popup-success {
+        position: fixed;
+        top: 10px; /* Position it near the top of the page */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for perfect centering */
+        background-color: #bd9100; /* Warm orange #FFA500 */
+        color: #FFFFFF; /* White text for visibility */
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        opacity: 1;
+        transition: opacity 3s ease-in-out; /* Smooth fade-out effect */
+        z-index: 1000; /* Ensure it stays on top */
+        font-size: 0.9em; /* Smaller font size to make it compact */
+    }
+
+    .popup-fail {
+        position: fixed;
+        top: 10px; /* Position it near the top of the page */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for perfect centering */
+        background-color: #bd3300; /* Warm orange #FFA500 */
+        color: #FFFFFF; /* White text for visibility */
+        padding: 10px 20px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        opacity: 1;
+        transition: opacity 3s ease-in-out; /* Smooth fade-out effect */
+        z-index: 1000; /* Ensure it stays on top */
+        font-size: 0.9em; /* Smaller font size to make it compact */
+    }
+
+</style>
+
