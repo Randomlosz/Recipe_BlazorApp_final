@@ -9,6 +9,7 @@ namespace BlazorApp_Recipes.Data
 
         public DbSet<Recipe> Recipes{ get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<ShoppingList> ShoppingLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

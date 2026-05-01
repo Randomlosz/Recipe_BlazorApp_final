@@ -54,8 +54,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdBc3Npc3RhbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Renii/Documents/GitHub/Recipe_BlazorApp/BlazorApp_Recipes/Pages/ShoppingList.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdMaXN0LnJhem9y
+[C:/Users/Renii/Documents/GitHub/Recipe_BlazorApp/BlazorApp_Recipes/Pages/ShoppingListBook.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdMaXN0Qm9vay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Renii/Documents/GitHub/Recipe_BlazorApp/BlazorApp_Recipes/Pages/ShoppingListDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hvcHBpbmdMaXN0RGV0YWlscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Renii/Documents/GitHub/Recipe_BlazorApp/BlazorApp_Recipes/Shared/SurveyPrompt.razor]
