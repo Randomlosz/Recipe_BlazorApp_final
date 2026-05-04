@@ -12,3 +12,7 @@ obj/
 # Publish output
 wwwroot/dist/
 
+# Build results
+bin/
+obj/
+
