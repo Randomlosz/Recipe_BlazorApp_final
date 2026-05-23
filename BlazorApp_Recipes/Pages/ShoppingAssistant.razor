@@ -20,6 +20,10 @@
 
 
 @code {
+    // Produce, Bakery, Deli, Meat & Fish, Diary, Frozen, Pasta & Rice, Floer & Spice & Suger, Canned Goods, Snacks & Sweets, Beverages & Alcohol, International
+    List<string> sectionPriorityOrder = new List<string> {"Produce","Diary", "Bakery", "Meat & Fish", "Deli",
+        "Flour & Spice & Sugar", "Canned Goods", "Pasta & Rice", "Beverages & Alcohol", "Snacks & Sweets", "Frozen", "International" 
+    };
     enum ShoppingMode
     {
         SelectList,
@@ -74,6 +78,16 @@
     {
         // Use your conversion function
         sections = BuildSectionsFromList(selectedList);
+
+        //Sort sections
+        sections = sections
+            .OrderBy(kvp =>
+            {
+                int index = sectionPriorityOrder.IndexOf(kvp.Key);
+                return index == -1 ? int.MaxValue : index; // unknown sections go last
+            })
+            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
 
         currentSectionIndex = 0;
         mode = ShoppingMode.Shopping;
