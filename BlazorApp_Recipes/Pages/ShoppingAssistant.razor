@@ -80,10 +80,11 @@
         sections = BuildSectionsFromList(selectedList);
 
         //Sort sections
+            //var sectionPriorityLookup = sectionPriorityOrder.Select((e, i) => (e, i)).ToDictionary(it => it.e, it => it.i); //n*logn instead of n*m
         sections = sections
             .OrderBy(kvp =>
             {
-                int index = sectionPriorityOrder.IndexOf(kvp.Key);
+                int index = sectionPriorityOrder.IndexOf(kvp.Key); // sectionPriorityLookup[kvp.Key]; //n*logn instead of n*m
                 return index == -1 ? int.MaxValue : index; // unknown sections go last
             })
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
